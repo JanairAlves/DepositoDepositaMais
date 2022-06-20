@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "DepositoDepositaMais.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/DepositoDepositaMais.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DepositoDepositaMais.Core.dll": {}
+        }
+      },
+      "DepositoDepositaMais.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DepositoDepositaMais.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DepositoDepositaMais.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DepositoDepositaMais.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DepositoDepositaMais.Core/1.0.0": {
+      "type": "project",
+      "path": "../DepositoDepositaMais.Core/DepositoDepositaMais.Core.csproj",
+      "msbuildProject": "../DepositoDepositaMais.Core/DepositoDepositaMais.Core.csproj"
+    },
+    "DepositoDepositaMais.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../DepositoDepositaMais.Infrastructure/DepositoDepositaMais.Infrastructure.csproj",
+      "msbuildProject": "../DepositoDepositaMais.Infrastructure/DepositoDepositaMais.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "DepositoDepositaMais.Core >= 1.0.0",
+      "DepositoDepositaMais.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\janai\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
+      "projectName": "DepositoDepositaMais.Application",
+      "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
+      "packagesPath": "C:\\Users\\janai\\.nuget\\packages\\",
+      "outputPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\janai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
+              "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj"
+            },
+            "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj": {
+              "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

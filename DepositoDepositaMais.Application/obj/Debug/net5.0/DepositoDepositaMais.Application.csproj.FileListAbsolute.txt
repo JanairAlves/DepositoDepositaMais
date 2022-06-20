@@ -1,0 +1,17 @@
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Application.deps.json
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Application.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Application.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Core.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Core.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.csproj.AssemblyReference.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.AssemblyInfoInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.AssemblyInfo.cs
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.csproj.CoreCompileInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.csproj.CopyComplete
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\refint\DepositoDepositaMais.Application.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\DepositoDepositaMais.Application.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Application\obj\Debug\net5.0\ref\DepositoDepositaMais.Application.dll

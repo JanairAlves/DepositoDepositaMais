@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e0b6e5af-e1fc-4532-b725-8bcc5bf162e0": {
+      "ProjectGuid": "e0b6e5af-e1fc-4532-b725-8bcc5bf162e0",
+      "DisplayName": "DepositoDepositaMais.API",
+      "ColorIndex": 0
+    },
+    "4cd98afa-9cd3-48c1-96ef-aef0150ab1e9": {
+      "ProjectGuid": "4cd98afa-9cd3-48c1-96ef-aef0150ab1e9",
+      "DisplayName": "DepositoDepositaMais.Core",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

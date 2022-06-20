@@ -1,0 +1,12 @@
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\bin\Debug\net5.0\DepositoDepositaMais.Core.deps.json
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\bin\Debug\net5.0\DepositoDepositaMais.Core.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\bin\Debug\net5.0\DepositoDepositaMais.Core.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.csproj.AssemblyReference.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.AssemblyInfoInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.AssemblyInfo.cs
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.csproj.CoreCompileInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\refint\DepositoDepositaMais.Core.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\DepositoDepositaMais.Core.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Core\obj\Debug\net5.0\ref\DepositoDepositaMais.Core.dll

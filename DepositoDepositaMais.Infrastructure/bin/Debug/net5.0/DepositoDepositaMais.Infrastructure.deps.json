@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "DepositoDepositaMais.Infrastructure/1.0.0": {
+        "dependencies": {
+          "DepositoDepositaMais.Core": "1.0.0"
+        },
+        "runtime": {
+          "DepositoDepositaMais.Infrastructure.dll": {}
+        }
+      },
+      "DepositoDepositaMais.Core/1.0.0": {
+        "runtime": {
+          "DepositoDepositaMais.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DepositoDepositaMais.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DepositoDepositaMais.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

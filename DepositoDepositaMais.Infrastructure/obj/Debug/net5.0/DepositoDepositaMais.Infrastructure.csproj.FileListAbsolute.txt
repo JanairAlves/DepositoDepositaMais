@@ -1,0 +1,15 @@
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.deps.json
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Core.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Core.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.csproj.AssemblyReference.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.AssemblyInfoInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.AssemblyInfo.cs
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.csproj.CopyComplete
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\refint\DepositoDepositaMais.Infrastructure.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.pdb
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\ref\DepositoDepositaMais.Infrastructure.dll

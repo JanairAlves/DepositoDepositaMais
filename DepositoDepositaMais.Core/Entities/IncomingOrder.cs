@@ -6,11 +6,10 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class IncomingOrder : BaseEntity
     {
-        public IncomingOrder(int idDeposit, int idRepresentative, int idProduct, int quantity, decimal value, string description, IncomingOrderStatusEnum status, DateTime expectedDeliveryIn)
+        public IncomingOrder(int idDeposit, int idRepresentative, int quantity, decimal value, string description, IncomingOrderStatusEnum status, DateTime expectedDeliveryIn)
         {
             IdDeposit = idDeposit;
             IdRepresentative = idRepresentative;
-            IdProduct = idProduct;
             Quantity = quantity;
             Value = value;
             Description = description;
@@ -23,7 +22,6 @@ namespace DepositoDepositaMais.Core.Entities
         public Deposit Deposit { get; private set; }
         public int IdRepresentative { get; private set; }
         public Representative Representative { get; private set; }
-        public int IdProduct { get; private set; }
         public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
@@ -32,9 +30,8 @@ namespace DepositoDepositaMais.Core.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime ExpectedDeliveryIn { get; private set; }
 
-        public void Update(int idProduct, int quantity, decimal value, string description, DateTime expectedDeliveryIn) 
+        public void Update(int quantity, decimal value, string description, DateTime expectedDeliveryIn) 
         {
-            IdProduct = idProduct;
             Quantity = quantity;
             Value = value;
             Description = description;

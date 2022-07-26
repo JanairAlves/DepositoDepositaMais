@@ -14,7 +14,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
-        public DbSet<Storage> Storagehouse { get; set; }
+        public DbSet<StoragePlace> StoragePlace { get; set; }
         public DbSet<Deposit> Deposits { get; set; }
         public DbSet<IncomingInvoice> IncomingInvoices { get; set; }
         public DbSet<IncomingOrder> IncomingOrders { get; set; }
@@ -34,8 +34,6 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
             modelBuilder.Entity<IncomingInvoice>()
                 .HasKey(ii => ii.Id);
 
-
-
             modelBuilder.Entity<IncomingOrder>()
                 .HasKey(io => io.Id);
 
@@ -53,27 +51,18 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
 
             modelBuilder.Entity<IncomingOrder>()
                 .HasMany(io => io.IncomingOrderProducts)
-                .WithOne(iop => iop.Product)
-                .HasForeignKey(io => io.IdProduct)
+                .WithOne()
+                .HasForeignKey(io => io.IdIncomingOrder)
                 .OnDelete(DeleteBehavior.Restrict);
-            // Na formação Formação ASP.NET Core,
-            // Do modulo Persistência com Entity Framework Core,
-            // Aula Configurando as Entidades Para Tabelas - Parte 2,
-            // Entre o tempo 6min50seg e 8min10seg.
-
-            /* Na definição do relacionamento entre as entidades, e usado o WithOne sem informar a propriedade de navegação, 
-             * pois no contexto não houve a necessidade.
-             * Enquanto vou fazendo o curso e fazendo o projeto do projeto do curso, em paralelo vou fazendo um outro projeto pessoal,
-             * no contexto desse projeto, entendo que seria interessante passa a própriedade de navegação para recuperação dos dados.
-             * Tentei fazer aqui dessa forma `.WithOne(iop => iop.Product)`, mas está me retornando o erro 
-             * "CS0029: Cannot implicitly convert type 'DepositoDepositaMais.Core.Entities.Product' to 'DepositoDepositaMais.Core.Entities.IncomingOrder'"
-             * e
-             * "CS1662: Cannot convert lambda Expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type"
-             */
-
 
             modelBuilder.Entity<IncomingOrderProducts>()
-                .HasKey(io => io.Id);
+                .HasKey(iop => iop.Id);
+
+            modelBuilder.Entity<IncomingOrderProducts>()
+                .HasOne(iop => iop.Product)
+                .WithMany()
+                .HasForeignKey(iop => iop.IdProduct)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<OutgoingInvoice>()
                 .HasKey(oi => oi.Id);
@@ -93,7 +82,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
             modelBuilder.Entity<Skill>()
                 .HasKey(s => s.Id);
 
-            modelBuilder.Entity<Storage>()
+            modelBuilder.Entity<StoragePlace>()
                 .HasKey(s => s.Id);
 
             modelBuilder.Entity<User>()

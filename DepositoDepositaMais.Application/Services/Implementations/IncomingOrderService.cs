@@ -21,9 +21,6 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var incomingOrder = new IncomingOrder(
                 inputModel.IdDeposit,
-                inputModel.IdStorage,
-                inputModel.IdProduct,
-                inputModel.IdProvider,
                 inputModel.IdRepresentative,
                 inputModel.Quantity,
                 inputModel.Value,
@@ -40,7 +37,6 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == inputModel.Id);
             incomingOrder.Update(
-                inputModel.IdProduct,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -55,7 +51,6 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 .Select(io => new IncomingOrderViewModel(
                     io.Id,
                     io.IdDeposit,
-                    io.IdProduct,
                     io.Quantity,
                     io.Value,
                     io.Status,
@@ -71,10 +66,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var incomingOrderDetailsViewModel = new IncomingOrderDetailsViewModel(
                 incomingOrder.Id,
                 incomingOrder.IdDeposit,
-                incomingOrder.IdStorage,
-                incomingOrder.IdProvider,
                 incomingOrder.IdRepresentative,
-                incomingOrder.IdProduct,
                 incomingOrder.Quantity,
                 incomingOrder.Value,
                 incomingOrder.Description,

@@ -9,11 +9,10 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class IncomingOrderViewModel
     {
-        public IncomingOrderViewModel(int id, int idDeposit, int idProduct, int quantity, decimal value, IncomingOrderStatusEnum status, DateTime createdAt)
+        public IncomingOrderViewModel(int id, int idDeposit, int quantity, decimal value, IncomingOrderStatusEnum status, DateTime createdAt)
         {
             Id = id;
             IdDeposit = idDeposit;
-            IdProduct = idProduct;
             Quantity = quantity;
             Value = value;
             Status = status;
@@ -22,7 +21,6 @@ namespace DepositoDepositaMais.Application.ViewModels
 
         public int Id { get; }
         public int IdDeposit { get; private set; }
-        public int IdProduct { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
         public IncomingOrderStatusEnum Status { get; private set; }

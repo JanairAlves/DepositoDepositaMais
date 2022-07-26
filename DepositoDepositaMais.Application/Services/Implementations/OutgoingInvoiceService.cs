@@ -21,7 +21,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var outgoingInvoice = new OutgoingInvoice(
                 inputModel.IdDeposito,
-                inputModel.IdStorage,
+                inputModel.IdStoragePlace,
                 inputModel.IdProduct,
                 inputModel.Quantity,
                 inputModel.Value,
@@ -37,7 +37,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == inputModel.Id);
             outgoingInvoice.Update(
-                inputModel.IdStorage,
+                inputModel.IdStoragePlace,
                 inputModel.IdProduct,
                 inputModel.Quantity,
                 inputModel.Value,
@@ -53,7 +53,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 .Select(oi => new OutgoingInvoiceViewModel(
                     oi.Id,
                 oi.IdDeposito,
-                oi.IdStorage,
+                oi.IdStoragePlace,
                 oi.IdProduct,
                 oi.Quantity,
                 oi.Value)
@@ -68,7 +68,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var outgoingInvoiceDetailsViewModel = new OutgoingInvoiceDetailsViewModel(
                 outgoingInvoice.Id,
                 outgoingInvoice.IdDeposito,
-                outgoingInvoice.IdStorage,
+                outgoingInvoice.IdStoragePlace,
                 outgoingInvoice.IdProduct,
                 outgoingInvoice.Quantity,
                 outgoingInvoice.Value,

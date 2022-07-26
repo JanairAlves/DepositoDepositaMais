@@ -1,7 +1,7 @@
 ﻿
 namespace DepositoDepositaMais.Infrastructure.CloudServices.Interfaces
 {
-    public interface IFileStorageService
+    public interface IFileStoragePlaceService
     {
         void UploadFile(byte[] bytes, string fileName);
     }

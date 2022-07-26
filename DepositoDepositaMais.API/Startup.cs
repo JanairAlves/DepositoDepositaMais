@@ -36,7 +36,7 @@ namespace DepositoDepositaMais.API
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProviderService, ProviderService>();
             services.AddScoped<IRepresentativeService, RepresentativeService>();
-            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IStoragePlaceService, StoragePlaceService>();
             services.AddScoped<IUserService, UserService>();
 
             services.AddControllers();

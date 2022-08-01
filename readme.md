@@ -1,4 +1,4 @@
-# Deposito Deposita Mais
+# Depósito Deposita Mais
 ___
 
 ###### Obs. O desenvolvimento deste projeto visa praticar os conceitos aprendidos no curso <a href="https://github.com/JanairAlves/DotNET_DiretoAoPonto">.NET Direto ao ponto</a>, porém o desenvolvimento se trata de um projeto a parte do projeto desenvolvido durante o curso, onde o cenário e ambiente são controlado, assim minimizando a ocorrência de possíveis erros.

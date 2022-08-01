@@ -12,6 +12,7 @@ namespace DepositoDepositaMais.Core.Entities
             Street = street;
         }
 
+        public int IdStoragePlace { get; private set; }
         public int IdProduct { get; private set; }
         public int Quantity { get; private set; }
         public int MinimumQuantity { get; private set; }

@@ -1,5 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -72,6 +73,10 @@ namespace DepositoDepositaMais.Core.Entities
         public string   Description { get; private set; }
         public DateTime ReceivedIn { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        #endregion
+
+        #region
+        public List<IncomingOrder> IncomingOrders { get; private set; }
         #endregion
 
         public void Update(string companyName, string companyAddress, string cNPJCompany, string cPFCompany, 

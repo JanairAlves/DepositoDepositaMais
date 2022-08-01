@@ -1,5 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -18,7 +19,12 @@ namespace DepositoDepositaMais.Core.Entities
             SendIn = sendIn;
         }
 
+        public int IdOutgoingOrder { get; private set; }
         public int IdDeposit { get; private set; }
+        public Deposit Deposit { get; private set; }
+        public int IdRepresentative { get; private set; }
+        public Representative Representative { get; private set; }
+        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
         public int IdStoragePlace { get; private set; }
         public int IdProduct { get; private set; }
         public int Quantity { get; private set; }

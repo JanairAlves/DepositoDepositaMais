@@ -1,13 +1,14 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
     public class OutgoingInvoice : BaseEntity
     {
-        public OutgoingInvoice(int idDeposito, int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime submittedIn)
+        public OutgoingInvoice(int idDeposit, int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime submittedIn)
         {
-            IdDeposito = idDeposito;
+            IdDeposit = idDeposit;
             IdStoragePlace = idStoragePlace;
             IdProduct = idProduct;
             Quantity = quantity;
@@ -18,7 +19,9 @@ namespace DepositoDepositaMais.Core.Entities
             SubmittedIn = submittedIn;
         }
 
-        public int IdDeposito { get; private set; }
+        public Deposit Deposit { get; set; }
+        public Representative Representative { get; set; }
+        public int IdDeposit { get; private set; }
         public int IdStoragePlace { get; private set; }
         public int IdProduct { get; private set; }
         public int Quantity { get; private set; }
@@ -27,6 +30,8 @@ namespace DepositoDepositaMais.Core.Entities
         public OutgoingOrderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime SubmittedIn { get; private set; }
+
+        public List<OutgoingOrder> OutgoingOrders { get; private set; }
 
         public void Update(int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime submittedIn)
         {

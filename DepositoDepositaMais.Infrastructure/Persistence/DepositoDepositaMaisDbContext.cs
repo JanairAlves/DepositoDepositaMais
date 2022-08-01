@@ -31,21 +31,39 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
             modelBuilder.Entity<Deposit>()
                 .HasKey(d => d.Id);
 
+            modelBuilder.Entity<Deposit>()
+                .HasMany(d => d.StoragePlaces)
+                .WithOne()
+                .HasForeignKey(d => d.IdStoragePlace)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Deposit>()
+                .HasMany(d => d.Representatives)
+                .WithOne()
+                .HasForeignKey(d => d.IdRepresentative)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<IncomingInvoice>()
                 .HasKey(ii => ii.Id);
+
+            modelBuilder.Entity<IncomingInvoice>()
+                .HasMany(ii => ii.IncomingOrders)
+                .WithOne()
+                .HasForeignKey(ii => ii.IdIncomingOrder)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<IncomingOrder>()
                 .HasKey(io => io.Id);
 
             modelBuilder.Entity<IncomingOrder>()
                 .HasOne(io => io.Deposit)
-                .WithMany(d => d.IncomingOrder)
+                .WithMany(d => d.IncomingOrders)
                 .HasForeignKey(io => io.IdDeposit)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<IncomingOrder>()
                 .HasOne(io => io.Representative)
-                .WithMany(r => r.IncomingOrder)
+                .WithMany(r => r.IncomingOrders)
                 .HasForeignKey(io => io.IdRepresentative)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -67,8 +85,41 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
             modelBuilder.Entity<OutgoingInvoice>()
                 .HasKey(oi => oi.Id);
 
+            modelBuilder.Entity<OutgoingInvoice>()
+                .HasMany(oi => oi.OutgoingOrders)
+                .WithOne()
+                .HasForeignKey(oi => oi.IdOutgoingOrder)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<OutgoingOrder>()
                 .HasKey(oo => oo.Id);
+
+            modelBuilder.Entity<OutgoingOrder>()
+                .HasOne(oo => oo.Deposit)
+                .WithMany(d => d.OutgoingOrders)
+                .HasForeignKey(oo => oo.IdDeposit)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OutgoingOrder>()
+                .HasOne(oo => oo.Representative)
+                .WithMany(r => r.OutgoingOrders)
+                .HasForeignKey(oo => oo.IdRepresentative)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OutgoingOrder>()
+                .HasMany(oo => oo.OutgoingOrderProducts)
+                .WithOne()
+                .HasForeignKey(oo => oo.IdOutgoingOrder)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OutgoingOrderProducts>()
+                .HasKey(iop => iop.Id);
+
+            modelBuilder.Entity<OutgoingOrderProducts>()
+                .HasOne(oop => oop.Product)
+                .WithMany()
+                .HasForeignKey(oop => oop.IdProduct)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.Id);
@@ -79,14 +130,14 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
             modelBuilder.Entity<Representative>()
                 .HasKey(r => r.Id);
 
-            modelBuilder.Entity<Skill>()
-                .HasKey(s => s.Id);
-
             modelBuilder.Entity<StoragePlace>()
                 .HasKey(s => s.Id);
 
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
+
+            modelBuilder.Entity<Skill>()
+                .HasKey(s => s.Id);
 
             modelBuilder.Entity<UserSkill>()
                 .HasKey(us => us.Id);

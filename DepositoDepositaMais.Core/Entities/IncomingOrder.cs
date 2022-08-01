@@ -18,6 +18,7 @@ namespace DepositoDepositaMais.Core.Entities
             ExpectedDeliveryIn = expectedDeliveryIn;
         }
 
+        public int IdIncomingOrder { get; private set; }
         public int IdDeposit { get; private set; }
         public Deposit Deposit { get; private set; }
         public int IdRepresentative { get; private set; }

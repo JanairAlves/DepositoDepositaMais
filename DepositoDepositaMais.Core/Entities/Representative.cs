@@ -19,6 +19,7 @@ namespace DepositoDepositaMais.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public int IdRepresentative  { get; private set; }
         public int IdProvider { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
@@ -29,7 +30,8 @@ namespace DepositoDepositaMais.Core.Entities
         public RepresentativeStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
-        public List<IncomingOrder> IncomingOrder { get; private set; }
+        public List<IncomingOrder> IncomingOrders { get; private set; }
+        public List<OutgoingOrder> OutgoingOrders { get; private set; }
 
         public void Update(int idProvider, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
         {

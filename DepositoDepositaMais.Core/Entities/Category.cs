@@ -13,6 +13,7 @@ namespace DepositoDepositaMais.Core.Entities
             Status = CategoryStatusEnum.Active;
         }
 
+        public Product Product { get; private set; }
         public string CategoryName { get; private set; }
         public string Description { get; private set; }
         public DateTime CreatedAt { get; private set; }

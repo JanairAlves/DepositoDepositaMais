@@ -25,7 +25,7 @@ namespace DepositoDepositaMais.Application.InputModels
         #endregion 
 
         #region Dados dos produtos
-        public int IdProduct { get; private set; }
+        public int ProductId { get; private set; }
         public int QuantityOfProducts { get; private set; }
         public decimal Value { get; private set; }
         #endregion

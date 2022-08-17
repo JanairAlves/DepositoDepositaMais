@@ -5,9 +5,9 @@ namespace DepositoDepositaMais.Application.InputModels
 {
     public class NewRepresentativeInputModel
     {
-        public NewRepresentativeInputModel(int idProvider, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
+        public NewRepresentativeInputModel(int providerId, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
         {
-            IdProvider = idProvider;
+            ProviderId = providerId;
             RepresentativeName = representativeName;
             Birthday = birthday;
             CPF = cPF;
@@ -18,7 +18,7 @@ namespace DepositoDepositaMais.Application.InputModels
             CreatedAt = DateTime.Now;
         }
 
-        public int IdProvider { get; private set; }
+        public int ProviderId { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }

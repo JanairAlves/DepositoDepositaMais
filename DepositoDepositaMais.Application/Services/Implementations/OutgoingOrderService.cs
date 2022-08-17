@@ -20,9 +20,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewOutgoingOrder(NewOutgoingOrderInputModel inputModel)
         {
             var outgoingOrder = new OutgoingOrder(
-                inputModel.IdDeposit,
-                inputModel.IdStoragePlace,
-                inputModel.IdProduct,
+                inputModel.DepositId,
+                inputModel.StoragePlaceId,
+                inputModel.ProductId,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -37,8 +37,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == inputModel.Id);
             outgoingOrder.Update(
-                inputModel.IdStoragePlace,
-                inputModel.IdProduct,
+                inputModel.StoragePlaceId,
+                inputModel.ProductId,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -52,9 +52,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var outgoingOrderViewModel = outgoingOrder
                 .Select(oo => new OutgoingOrderViewModel(
                     oo.Id,
-                    oo.IdDeposit,
-                    oo.IdStoragePlace,
-                    oo.IdProduct,
+                    oo.DepositId,
+                    oo.StoragePlaceId,
+                    oo.ProductId,
                     oo.Quantity,
                     oo.Value)
                 ).ToList();
@@ -67,9 +67,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
             var outgoingOrderDetailsViewModel = new OutgoingOrderDetailsViewModel(
                 outgoingOrder.Id,
-                outgoingOrder.IdDeposit,
-                outgoingOrder.IdStoragePlace,
-                outgoingOrder.IdProduct,
+                outgoingOrder.DepositId,
+                outgoingOrder.StoragePlaceId,
+                outgoingOrder.ProductId,
                 outgoingOrder.Quantity,
                 outgoingOrder.Value,
                 outgoingOrder.Description,

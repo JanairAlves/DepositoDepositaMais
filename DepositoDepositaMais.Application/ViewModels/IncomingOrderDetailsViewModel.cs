@@ -5,11 +5,11 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class IncomingOrderDetailsViewModel
     {
-        public IncomingOrderDetailsViewModel(int id, int idDeposit, int idRepresentative, int quantity, decimal value, string description, IncomingOrderStatusEnum status, DateTime createdAt, DateTime expectedDeliveryIn)
+        public IncomingOrderDetailsViewModel(int id, int depositId, int representativeId, int quantity, decimal value, string description, IncomingOrderStatusEnum status, DateTime createdAt, DateTime expectedDeliveryIn)
         {
             Id = id;
-            IdDeposit = idDeposit;
-            IdRepresentative = idRepresentative;
+            DepositId = depositId;
+            RepresentativeId = representativeId;
             Quantity = quantity;
             Value = value;
             Description = description;
@@ -19,8 +19,8 @@ namespace DepositoDepositaMais.Application.ViewModels
         }
 
         public int Id { get; }
-        public int IdDeposit { get; private set; }
-        public int IdRepresentative { get; private set; }
+        public int DepositId { get; private set; }
+        public int RepresentativeId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
         public string Description { get; private set; }

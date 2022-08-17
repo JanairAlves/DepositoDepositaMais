@@ -6,10 +6,10 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class ProductDetailsViewModel
     {
-        public ProductDetailsViewModel(string idProduct, int idProvider, string productName, string description, string packagingType, string quantityPackaging, ProductStatusEnum status, DateTime createdAt)
+        public ProductDetailsViewModel(string productId, int providerId, string productName, string description, string packagingType, string quantityPackaging, ProductStatusEnum status, DateTime createdAt)
         {
-            IdProduct = idProduct;
-            IdProvider = idProvider;
+            ProductId = productId;
+            ProviderId = providerId;
             ProductName = productName;
             Description = description;
             PackagingType = packagingType;
@@ -18,8 +18,8 @@ namespace DepositoDepositaMais.Application.ViewModels
             CreatedAt = createdAt;
         }
 
-        public string IdProduct { get; private set; }
-        public int IdProvider { get; private set; }
+        public string ProductId { get; private set; }
+        public int ProviderId { get; private set; }
         public string ProductName { get; private set; }
         public string Description { get; private set; }
         public string PackagingType { get; private set; }

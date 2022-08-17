@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DepositoDepositaMais.Application.ViewModels
 {
     public class StoragePlaceDetailsViewModel
     {
-        public StoragePlaceDetailsViewModel(int id, int idProduct, int quantity, int minimumQuantity, int maximumQuantity, string street)
+        public StoragePlaceDetailsViewModel(int id, int productId, int quantity, int minimumQuantity, int maximumQuantity, string street)
         {
             Id = id;
-            IdProduct = idProduct;
+            ProductId = productId;
             Quantity = quantity;
             MinimumQuantity = minimumQuantity;
             MaximumQuantity = maximumQuantity;
@@ -19,7 +14,7 @@ namespace DepositoDepositaMais.Application.ViewModels
         }
 
         public int Id { get; set; }
-        public int IdProduct { get; private set; }
+        public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public int MinimumQuantity { get; private set; }
         public int MaximumQuantity { get; private set; }

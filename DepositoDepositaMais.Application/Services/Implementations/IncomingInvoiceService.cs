@@ -35,7 +35,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.CarrierAdress,
                 inputModel.CarrierStateRegistration,
 
-                inputModel.IdProduct,
+                inputModel.ProductId,
                 inputModel.QuantityOfProducts,
                 inputModel.Value,
 
@@ -68,7 +68,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.CarrierAdress,
                 inputModel.CarrierStateRegistration,
                 
-                inputModel.IdProduct,
+                inputModel.ProductId,
                 inputModel.Value,
                 inputModel.QuantityOfProducts,
 

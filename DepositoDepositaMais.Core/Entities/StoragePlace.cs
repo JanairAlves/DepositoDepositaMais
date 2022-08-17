@@ -1,19 +1,22 @@
 ﻿
+using System.Collections.Generic;
+
 namespace DepositoDepositaMais.Core.Entities
 {
     public class StoragePlace : BaseEntity
     {
-        public StoragePlace(int idProduct, int quantity, int minimumQuantity, int maximumQuantity, string street)
+        public StoragePlace(int productId, int quantity, int minimumQuantity, int maximumQuantity, string street)
         {
-            IdProduct = idProduct;
+            ProductId = productId;
             Quantity = quantity;
             MinimumQuantity = minimumQuantity;
             MaximumQuantity = maximumQuantity;
             Street = street;
         }
 
-        public int IdStoragePlace { get; private set; }
-        public int IdProduct { get; private set; }
+        public int StoragePlaceId { get; private set; }
+        public int ProductId { get; private set; }
+        public List<Product> Product { get; private set; }
         public int Quantity { get; private set; }
         public int MinimumQuantity { get; private set; }
         public int MaximumQuantity { get; private set; }

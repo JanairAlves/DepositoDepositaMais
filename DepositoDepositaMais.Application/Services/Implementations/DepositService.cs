@@ -18,7 +18,11 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public int CreateNewDeposit(NewDepositInputModel inputModel)
         {
-            var deposit = new Deposit(inputModel.DepositName, inputModel.Description, inputModel.CNPJ);
+            var deposit = new Deposit(
+                inputModel.DepositName, 
+                inputModel.Description, 
+                inputModel.CNPJ);
+
             _dbContext.Deposits.Add(deposit);
 
             return deposit.Id;
@@ -27,7 +31,10 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateDeposit(UpdateDepositInputModel inputModel)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == inputModel.Id);
-            deposit.Update(inputModel.DepositName, inputModel.Description, inputModel.CNPJ);
+            deposit.Update(
+                inputModel.DepositName, 
+                inputModel.Description, 
+                inputModel.CNPJ);
         }
 
         public List<DepositViewModel> GetAll(string query)

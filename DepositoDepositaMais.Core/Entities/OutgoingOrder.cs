@@ -6,11 +6,11 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class OutgoingOrder : BaseEntity
     {
-        public OutgoingOrder(int idDeposit, int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime sendIn)
+        public OutgoingOrder(int depositId, int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime sendIn)
         {
-            IdDeposit = idDeposit;
-            IdStoragePlace = idStoragePlace;
-            IdProduct = idProduct;
+            DepositId = depositId;
+            StoragePlaceId = storagePlaceId;
+            ProductId = productId;
             Quantity = quantity;
             Value = value;
             Description = description;
@@ -19,25 +19,25 @@ namespace DepositoDepositaMais.Core.Entities
             SendIn = sendIn;
         }
 
-        public int IdOutgoingOrder { get; private set; }
-        public int IdDeposit { get; private set; }
+        public int OutgoingOrderId { get; private set; }
+        public int DepositId { get; private set; }
         public Deposit Deposit { get; private set; }
-        public int IdRepresentative { get; private set; }
+        public int RepresentativeId { get; private set; }
         public Representative Representative { get; private set; }
-        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
-        public int IdStoragePlace { get; private set; }
-        public int IdProduct { get; private set; }
+        public int StoragePlaceId { get; private set; }
+        public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
         public string Description { get; private set; }
         public OutgoingOrderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime SendIn { get; private set; }
+        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
 
-        public void Update(int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime sendIn)
+        public void Update(int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime sendIn)
         {
-            IdStoragePlace = idStoragePlace;
-            IdProduct = idProduct;
+            StoragePlaceId = storagePlaceId;
+            ProductId = productId;
             Quantity = quantity;
             Value = value;
             Description = description;

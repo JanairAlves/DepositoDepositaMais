@@ -1,16 +1,18 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace DepositoDepositaMais.Core.Entities
 {
     public class IncomingOrderProducts : BaseEntity
     {
-        public IncomingOrderProducts(int idIncomingOrder, int idProduct)
+        public IncomingOrderProducts(int incomingOrderId, int productId)
         {
-            IdIncomingOrder = idIncomingOrder;
-            IdProduct = idProduct;
+            IncomingOrderId = incomingOrderId;
+            ProductId = productId;
         }
 
-        public int IdIncomingOrder { get; private set; }
-        public int IdProduct { get; private set; }
-        public Product Product { get; private set; }
+        public int IncomingOrderId { get; private set; }
+        public List<IncomingOrder> IncomingOrders { get; private set; }
+        public int ProductId { get; private set; }
+        public List<Product> Products { get; private set; }
     }
 }

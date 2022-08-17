@@ -9,7 +9,7 @@ namespace DepositoDepositaMais.Core.Entities
         public IncomingInvoice(string companyName, string companyAddress, string cNPJCompany, string cPFCompany, 
             string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, 
             string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, 
-            int idProduct, int quantityOfProducts, decimal value, TypeOfVolumeEnum typeOfVolume, 
+            int productId, int quantityOfProducts, decimal value, TypeOfVolumeEnum typeOfVolume, 
             int weightOfTheCargo, string description, DateTime receivedIn)
         {
             CompanyName = companyName;
@@ -25,7 +25,7 @@ namespace DepositoDepositaMais.Core.Entities
             CarrierAdress = carrierAdress;
             CarrierStateRegistration = carrierStateRegistration;
 
-            IdProduct = idProduct;
+            ProductId = productId;
             QuantityOfProducts = quantityOfProducts;
             Value = value;
 
@@ -58,7 +58,7 @@ namespace DepositoDepositaMais.Core.Entities
         #endregion 
 
         #region Dados dos produtos
-        public int IdProduct { get; private set; }
+        public int ProductId { get; private set; }
         public int QuantityOfProducts { get; private set; }
         public decimal Value { get; private set; }
         #endregion
@@ -81,7 +81,7 @@ namespace DepositoDepositaMais.Core.Entities
 
         public void Update(string companyName, string companyAddress, string cNPJCompany, string cPFCompany, 
             string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, string carPlate, 
-            string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, int idProduct,
+            string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, int productId,
             decimal value, int quantityOfProducts, TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo,
             IncomingInvoiceStateEnum status, string description, DateTime receivedIn)
         {
@@ -97,7 +97,7 @@ namespace DepositoDepositaMais.Core.Entities
             CPFCarrier = cPFCarrier;
             CarrierAdress = carrierAdress;
             CarrierStateRegistration = carrierStateRegistration;
-            IdProduct = idProduct;
+            ProductId = productId;
             QuantityOfProducts = quantityOfProducts;
             Value = value;
             TypeOfVolume = typeOfVolume;

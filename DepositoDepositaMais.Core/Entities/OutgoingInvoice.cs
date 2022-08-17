@@ -6,11 +6,11 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class OutgoingInvoice : BaseEntity
     {
-        public OutgoingInvoice(int idDeposit, int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime submittedIn)
+        public OutgoingInvoice(int depositId, int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime submittedIn)
         {
-            IdDeposit = idDeposit;
-            IdStoragePlace = idStoragePlace;
-            IdProduct = idProduct;
+            DepositId = depositId;
+            StoragePlaceId = storagePlaceId;
+            ProductId = productId;
             Quantity = quantity;
             Value = value;
             Description = description;
@@ -21,9 +21,9 @@ namespace DepositoDepositaMais.Core.Entities
 
         public Deposit Deposit { get; set; }
         public Representative Representative { get; set; }
-        public int IdDeposit { get; private set; }
-        public int IdStoragePlace { get; private set; }
-        public int IdProduct { get; private set; }
+        public int DepositId { get; private set; }
+        public int StoragePlaceId { get; private set; }
+        public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
         public string Description { get; private set; }
@@ -33,10 +33,10 @@ namespace DepositoDepositaMais.Core.Entities
 
         public List<OutgoingOrder> OutgoingOrders { get; private set; }
 
-        public void Update(int idStoragePlace, int idProduct, int quantity, decimal value, string description, DateTime submittedIn)
+        public void Update(int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime submittedIn)
         {
-            IdStoragePlace = idStoragePlace;
-            IdProduct = idProduct;
+            StoragePlaceId = storagePlaceId;
+            ProductId = productId;
             Quantity = quantity;
             Value = value;
             Description = description;

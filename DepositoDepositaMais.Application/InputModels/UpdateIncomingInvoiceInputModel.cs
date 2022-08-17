@@ -18,7 +18,7 @@ namespace DepositoDepositaMais.Application.InputModels
         public string CPFCarrier { get; set; }
         public string CarrierAdress { get; set; }
         public string CarrierStateRegistration { get; set; }
-        public int IdProduct { get; private set; }
+        public int ProductId { get; private set; }
         public int QuantityOfProducts { get; set; }
         public decimal Value { get; private set; }
         public TypeOfVolumeEnum TypeOfVolume { get; set; }

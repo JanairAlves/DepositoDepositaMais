@@ -61,7 +61,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 user.FullName,
                 user.Email,
                 user.BirthDate,
-                user.Skill,
+                user.Skills,
                 user.Status,
                 user.CreatedAt
                 );

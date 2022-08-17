@@ -20,9 +20,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewOutgoingInvoice(NewOutgoingInvoiceInputModel inputModel)
         {
             var outgoingInvoice = new OutgoingInvoice(
-                inputModel.IdDeposito,
-                inputModel.IdStoragePlace,
-                inputModel.IdProduct,
+                inputModel.DepositId,
+                inputModel.StoragePlaceId,
+                inputModel.ProductId,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -37,8 +37,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == inputModel.Id);
             outgoingInvoice.Update(
-                inputModel.IdStoragePlace,
-                inputModel.IdProduct,
+                inputModel.StoragePlaceId,
+                inputModel.ProductId,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -52,9 +52,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var outgoingInvoiceViewModel = outgoingInvoice
                 .Select(oi => new OutgoingInvoiceViewModel(
                     oi.Id,
-                oi.IdDeposito,
-                oi.IdStoragePlace,
-                oi.IdProduct,
+                oi.DepositId,
+                oi.StoragePlaceId,
+                oi.ProductId,
                 oi.Quantity,
                 oi.Value)
                 ).ToList();
@@ -67,9 +67,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == id);
             var outgoingInvoiceDetailsViewModel = new OutgoingInvoiceDetailsViewModel(
                 outgoingInvoice.Id,
-                outgoingInvoice.IdDeposito,
-                outgoingInvoice.IdStoragePlace,
-                outgoingInvoice.IdProduct,
+                outgoingInvoice.DepositId,
+                outgoingInvoice.StoragePlaceId,
+                outgoingInvoice.ProductId,
                 outgoingInvoice.Quantity,
                 outgoingInvoice.Value,
                 outgoingInvoice.Description,

@@ -3,10 +3,10 @@ namespace DepositoDepositaMais.Application.InputModels
 {
     public class UpdateStoragePlaceViewModel
     {
-        public UpdateStoragePlaceViewModel(int id, int idProduct, int quantity, int minimumQuantity, int maximumQuantity, string street)
+        public UpdateStoragePlaceViewModel(int id, int productId, int quantity, int minimumQuantity, int maximumQuantity, string street)
         {
             Id = id;
-            IdProduct = idProduct;
+            ProductId = productId;
             Quantity = quantity;
             MinimumQuantity = minimumQuantity;
             MaximumQuantity = maximumQuantity;
@@ -14,7 +14,7 @@ namespace DepositoDepositaMais.Application.InputModels
         }
 
         public int Id { get; private set; }
-        public int IdProduct { get; private set; }
+        public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public int MinimumQuantity { get; private set; }
         public int MaximumQuantity { get; private set; }

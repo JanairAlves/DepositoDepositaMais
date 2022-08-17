@@ -19,7 +19,10 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public int CreateNewCategory(NewCategoryInputModel inputModel)
         {
-            var category = new Category(inputModel.CategoryName, inputModel.Description);
+            var category = new Category(
+                inputModel.CategoryName, 
+                inputModel.Description);
+
             _dbContext.Categories.Add(category);
 
             return category.Id;
@@ -29,7 +32,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var category = _dbContext.Categories.SingleOrDefault(c => c.Id == inputModel.Id);
             
-            category.Update(inputModel.CategoryName, inputModel.Description);
+            category.Update(
+                inputModel.CategoryName, 
+                inputModel.Description);
         }
 
         public List<CategoryViewModel> GetAll(string query)

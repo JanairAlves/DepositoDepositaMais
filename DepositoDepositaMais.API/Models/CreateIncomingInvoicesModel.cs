@@ -6,7 +6,7 @@ namespace DepositoDepositaMais.API.Models
     {
         public int InvoiceNumeric { get; set; }
         public string InvoiceStatus { get; set; }
-        public int IdOrder { get; set; }
+        public int OrderId { get; set; }
         public int ProviderId { get; set; }
         public int ProductId { get; set; }
         public int QuantityProduct { get; set; }

@@ -15,15 +15,17 @@ namespace DepositoDepositaMais.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public string   DepositName { get; private set; }
+        public string DepositName { get; private set; }
         public string Description { get; private set; }
         public string CNPJ { get; private set; }
-        public List<IncomingOrder> IncomingOrders { get; private set; }
-        public List<OutgoingOrder> OutgoingOrders { get; private set; }
         public DepositStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public int StoragePlaceId { get; private set; }
         public List<StoragePlace> StoragePlaces { get; private set; }
-        public List<Representative> Representatives { get; private set; }
+        public List<Provider> Providers { get; private set; }
+        public List<IncomingOrder> IncomingOrders { get; private set; }
+        public List<OutgoingOrder> OutgoingOrders { get; private set; }
+        public User User { get; private set; }
 
         public void Update(string depositName, string description, string cNPJ)
         {

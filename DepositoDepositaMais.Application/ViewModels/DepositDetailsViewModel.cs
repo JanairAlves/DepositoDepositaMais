@@ -5,9 +5,9 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class DepositDetailsViewModel
     {
-        public DepositDetailsViewModel(int idDeposit, string depositName, string description, string cNPJ, DepositStatusEnum status, DateTime createdAt)
+        public DepositDetailsViewModel(int depositId, string depositName, string description, string cNPJ, DepositStatusEnum status, DateTime createdAt)
         {
-            IdDeposit = idDeposit;
+            DepositId = depositId;
             DepositName = depositName;
             Description = description;
             CNPJ = cNPJ;
@@ -15,7 +15,7 @@ namespace DepositoDepositaMais.Application.ViewModels
             CreatedAt = createdAt;
         }
 
-        public int IdDeposit { get; }
+        public int DepositId { get; }
         public string DepositName { get; private set; }
         public string Description { get; private set; }
         public string CNPJ { get; private set; }

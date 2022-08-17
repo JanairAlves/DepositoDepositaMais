@@ -20,8 +20,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewProduct(NewProductInputModel inputModel)
         {
             var product = new Product(
-                inputModel.IdProduct,
-                inputModel.IdProvider,
+                inputModel.ProductId,
+                inputModel.ProviderId,
                 inputModel.ProductName,
                 inputModel.Description,
                 inputModel.PackagingType,
@@ -36,8 +36,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == inputModel.Id);
             product.Update(
-                product.IdProduct,
-                product.IdProvider,
+                product.ProductId,
+                product.ProviderId,
                 product.ProductName,
                 product.Description,
                 product.PackagingType,
@@ -50,8 +50,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var product = _dbContext.Products;
             var productViewModel = product
                 .Select(p => new ProductViewModel(
-                    p.IdProduct,
-                    p.IdProvider,
+                    p.ProductId,
+                    p.ProviderId,
                     p.ProductName,
                     p.PackagingType,
                     p.QuantityPackaging)
@@ -64,8 +64,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
             var productDetailsViewModel = new ProductDetailsViewModel(
-                product.IdProduct,
-                product.IdProvider,
+                product.ProductId,
+                product.ProviderId,
                 product.ProductName,
                 product.Description,
                 product.PackagingType,

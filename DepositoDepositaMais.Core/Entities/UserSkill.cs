@@ -3,13 +3,13 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class UserSkill : BaseEntity
     {
-        public UserSkill(int idUser, int idSkill)
+        public UserSkill(int userId, int skillId)
         {
-            IdUser = idUser;
-            IdSkill = idSkill;
+            UserId = userId;
+            SkillId = skillId;
         }
 
-        public int IdUser { get; private set; }
-        public int IdSkill { get; private set; }
+        public int UserId { get; private set; }
+        public int SkillId { get; private set; }
     }
 }

@@ -23,6 +23,7 @@ namespace DepositoDepositaMais.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public int ProviderId { get; private set; }
         public string ProviderName{ get; private set; }
         public string Description { get; private set; }
         public string CNPJ { get; private set; }
@@ -32,6 +33,8 @@ namespace DepositoDepositaMais.Core.Entities
         public ProviderTypeEnum ProviderType { get; private set; }
         public ProviderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public List<ProvidersProducts> ProvidersProducts { get; private set; }
+        public List<Representative> Representative { get; private set; }
 
         public void Update(string providerName, string description, string cNPJ, string site, string emailAddress, string phoneNumber, ProviderTypeEnum providerType)
         {

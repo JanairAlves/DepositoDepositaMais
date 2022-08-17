@@ -21,7 +21,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewStoragePlace(NewStoragePlaceInputModel inputModel)
         {
             var storagePlace = new StoragePlace(
-                inputModel.IdProduct,
+                inputModel.ProductId,
                 inputModel.Quantity,
                 inputModel.MinimumQuantity,
                 inputModel.MaximumQuantity,
@@ -49,7 +49,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var storagePlaceViewModel = storagePlace
                 .Select(s => new StoragePlaceViewModel(
                     s.Id,
-                    s.IdProduct,
+                    s.ProductId,
                     s.Quantity,
                     s.Street)
                 ).ToList();
@@ -62,7 +62,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var storagePlace = _dbContext.StoragePlace.SingleOrDefault(s => s.Id == id);
             var storagePlaceViewModel = new StoragePlaceDetailsViewModel(
                 storagePlace.Id,
-                storagePlace.IdProduct,
+                storagePlace.ProductId,
                 storagePlace.Quantity,
                 storagePlace.MinimumQuantity,
                 storagePlace.MaximumQuantity,

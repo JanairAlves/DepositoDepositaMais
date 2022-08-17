@@ -21,7 +21,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewRepresentative(NewRepresentativeInputModel inputModel)
         {
             var representative = new Representative(
-                inputModel.IdProvider,
+                inputModel.ProviderId,
                 inputModel.RepresentativeName,
                 inputModel.Birthday,
                 inputModel.CPF,
@@ -38,7 +38,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == inputModel.Id);
             representative.Update(
-                inputModel.IdProvider,
+                inputModel.ProviderId,
                 inputModel.RepresentativeName,
                 inputModel.Birthday,
                 inputModel.CPF,
@@ -53,7 +53,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var representative = _dbContext.Representatives;
             var representativeViewModel = representative
                 .Select(r => new RepresentativeViewModel(
-                    r.IdProvider,
+                    r.ProviderId,
                     r.RepresentativeName,
                     r.PhoneNumber,
                     r.Email,
@@ -68,7 +68,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
             var representativeDetailsViewModel = new RepresentativeDetailsViewModel(
                 representative.Id,
-                representative.IdProvider,
+                representative.ProviderId,
                 representative.RepresentativeName,
                 representative.Birthday,
                 representative.CPF,

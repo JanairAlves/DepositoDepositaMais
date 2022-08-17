@@ -20,8 +20,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public int CreateNewIncomingOrder(NewIncomingOrderInputModel inputModel)
         {
             var incomingOrder = new IncomingOrder(
-                inputModel.IdDeposit,
-                inputModel.IdRepresentative,
+                inputModel.DepositId,
+                inputModel.RepresentativeId,
                 inputModel.Quantity,
                 inputModel.Value,
                 inputModel.Description,
@@ -50,7 +50,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var incomingOrderViewModel = incomingOrder
                 .Select(io => new IncomingOrderViewModel(
                     io.Id,
-                    io.IdDeposit,
+                    io.DepositId,
                     io.Quantity,
                     io.Value,
                     io.Status,
@@ -65,8 +65,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
             var incomingOrderDetailsViewModel = new IncomingOrderDetailsViewModel(
                 incomingOrder.Id,
-                incomingOrder.IdDeposit,
-                incomingOrder.IdRepresentative,
+                incomingOrder.DepositId,
+                incomingOrder.RepresentativeId,
                 incomingOrder.Quantity,
                 incomingOrder.Value,
                 incomingOrder.Description,

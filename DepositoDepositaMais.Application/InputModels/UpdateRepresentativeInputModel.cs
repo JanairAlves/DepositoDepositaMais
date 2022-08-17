@@ -5,7 +5,7 @@ namespace DepositoDepositaMais.Application.InputModels
     public class UpdateRepresentativeInputModel
     {
         public int Id { get; }
-        public int IdProvider { get; private set; }
+        public int ProviderId { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }

@@ -1,14 +1,15 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
     public class Product : BaseEntity
     {
-        public Product(string idProduct, int idProvider, string productName, string description, string quantityPackaging, string packagingType)
+        public Product(string productId, int providerId, string productName, string description, string quantityPackaging, string packagingType)
         {
-            IdProduct = idProduct;
-            IdProvider = idProvider;
+            ProductId = productId;
+            ProviderId = providerId;
             ProductName = productName;
             Description = description;
             PackagingType = packagingType;
@@ -18,20 +19,24 @@ namespace DepositoDepositaMais.Core.Entities
             Status = ProductStatusEnum.Active;
         }
 
-        public string IdProduct { get; private set; }
-        public int IdProvider { get; private set; }
-        public Provider Provider { get; private set; }
+        public string ProductId { get; private set; }
+        public int ProviderId { get; private set; }
+        public int CategoryId { get; private set; }
+        public Category Category { get; private set; }
         public string ProductName { get; private set; }
         public string Description { get; private set; }
         public string PackagingType { get; private set; }
         public string QuantityPackaging { get; private set; }
         public ProductStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
+        public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
+        public List<ProvidersProducts> ProvidersProducts { get; private set; }
 
-        public void Update(string idProduct, int idProvider, string productName, string description, string packagingType, string quantityPackaging)
+        public void Update(string productId, int providerId, string productName, string description, string packagingType, string quantityPackaging)
         {
-            IdProduct = idProduct;
-            IdProvider = idProvider;
+            ProductId = productId;
+            ProviderId = providerId;
             ProductName = productName;
             Description = description;
             PackagingType = packagingType;

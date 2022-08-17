@@ -3,6 +3,6 @@
     public class UpdateProductModel
     {
         public string Name { get; set; }
-        public string ProductCode { get; set; }
+        public string CodeProduct { get; set; }
     }
 }

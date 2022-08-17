@@ -6,9 +6,9 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class Representative : BaseEntity
     {
-        public Representative(int idProvider, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
+        public Representative(int providerId, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
         {
-            IdProvider = idProvider;
+            ProviderId = providerId;
             RepresentativeName = representativeName;
             Birthday = birthday;
             CPF = cPF;
@@ -19,8 +19,9 @@ namespace DepositoDepositaMais.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public int IdRepresentative  { get; private set; }
-        public int IdProvider { get; private set; }
+        public int RepresentativeId { get; private set; }
+        public int ProviderId { get; private set; }
+        public List<Provider> Provider { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }
@@ -35,7 +36,7 @@ namespace DepositoDepositaMais.Core.Entities
 
         public void Update(int idProvider, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description)
         {
-            IdProvider = idProvider;
+            ProviderId = idProvider;
             RepresentativeName = representativeName;
             Birthday = birthday;
             CPF = cPF;

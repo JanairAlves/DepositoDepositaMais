@@ -5,10 +5,10 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class RepresentativeDetailsViewModel
     {
-        public RepresentativeDetailsViewModel(int id, int idProvider, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description, RepresentativeStatusEnum status, DateTime createdAt)
+        public RepresentativeDetailsViewModel(int id, int providerId, string representativeName, DateTime birthday, string cPF, string phoneNumber, string email, string description, RepresentativeStatusEnum status, DateTime createdAt)
         {
             Id = id;
-            IdProvider = idProvider;
+            ProviderId = providerId;
             RepresentativeName = representativeName;
             Birthday = birthday;
             CPF = cPF;
@@ -20,7 +20,7 @@ namespace DepositoDepositaMais.Application.ViewModels
         }
 
         public int Id { get; private set; }
-        public int IdProvider { get; private set; }
+        public int ProviderId { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }

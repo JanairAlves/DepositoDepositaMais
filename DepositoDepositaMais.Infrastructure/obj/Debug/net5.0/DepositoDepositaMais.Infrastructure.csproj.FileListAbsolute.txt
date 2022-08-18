@@ -13,3 +13,6 @@ D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\Depo
 D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\refint\DepositoDepositaMais.Infrastructure.dll
 D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.pdb
 D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\ref\DepositoDepositaMais.Infrastructure.dll
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.runtimeconfig.json
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\bin\Debug\net5.0\DepositoDepositaMais.Infrastructure.runtimeconfig.dev.json
+D:\Estudo\BackEnd\CSharp\LuisDev\DotNET_ProjetoPessoal\DepositoDepositaMais\DepositoDepositaMais.Infrastructure\obj\Debug\net5.0\DepositoDepositaMais.Infrastructure.genruntimeconfig.cache

@@ -4,6 +4,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +26,8 @@ namespace DepositoDepositaMais.API
         {
             services.Configure<OpeningTimeOption>(Configuration.GetSection("OpeningTime"));
 
-            services.AddSingleton<DepositoDepositaMaisDbContext>();
+            var connectionString = Configuration.GetConnectionString("DepositoDepositaMaisCs");
+            services.AddDbContext<DepositoDepositaMaisDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDepositService, DepositService>();

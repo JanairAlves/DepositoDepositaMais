@@ -29,9 +29,9 @@ namespace DepositoDepositaMais.Core.Entities
         public string QuantityPackaging { get; private set; }
         public ProductStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
-        public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
-        public List<ProvidersProducts> ProvidersProducts { get; private set; }
+        //public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
+        //public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
+        //public List<ProvidersProducts> ProvidersProducts { get; private set; }
 
         public void Update(string productId, int providerId, string productName, string description, string packagingType, string quantityPackaging)
         {

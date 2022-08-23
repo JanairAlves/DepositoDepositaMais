@@ -6,13 +6,13 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class User : BaseEntity
     {
-        public User(string fullName, string email, DateTime birthDate, List<UserSkill> skills)
+        public User(string fullName, string email, DateTime birthDate)
         {
             FullName = fullName;
             Email = email;
             BirthDate = birthDate;
 
-            Skills = skills;
+            Skills = new List<UserSkill>();
             Status = UserStatusEnum.Active;
             CreatedAt = DateTime.Now;
         }
@@ -21,10 +21,10 @@ namespace DepositoDepositaMais.Core.Entities
         public string FullName { get; private set; }
         public string Email { get; private set; }
         public DateTime BirthDate { get; private set; }
-        public List<UserSkill> Skills { get; private set; }
         public UserStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public Deposit Deposit { get; private set; }
+        public List<UserSkill> Skills { get; private set; }
 
         public void Update(string fullName, string email, DateTime birthDate, List<UserSkill> skills)
         {

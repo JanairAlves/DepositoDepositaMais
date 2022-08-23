@@ -1,6 +1,5 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -29,7 +28,7 @@ namespace DepositoDepositaMais.Core.Entities
         public IncomingOrderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime ExpectedDeliveryIn { get; private set; }
-        public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
+        //public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
 
         public void Update(int quantity, decimal value, string description, DateTime expectedDeliveryIn) 
         {

@@ -21,7 +21,7 @@ namespace DepositoDepositaMais.Core.Entities
 
         public int RepresentativeId { get; private set; }
         public int ProviderId { get; private set; }
-        public List<Provider> Provider { get; private set; }
+        //public List<Provider> Provider { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }

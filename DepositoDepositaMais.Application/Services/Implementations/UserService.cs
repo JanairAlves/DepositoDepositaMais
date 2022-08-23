@@ -22,8 +22,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var user = new User(
                 inputModel.FullName,
                 inputModel.Email,
-                inputModel.BirthDate,
-                inputModel.Skill
+                inputModel.BirthDate
                 );
 
             return user.Id;

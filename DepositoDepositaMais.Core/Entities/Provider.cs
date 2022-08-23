@@ -1,9 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -33,7 +30,7 @@ namespace DepositoDepositaMais.Core.Entities
         public ProviderTypeEnum ProviderType { get; private set; }
         public ProviderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public List<ProvidersProducts> ProvidersProducts { get; private set; }
+        //public List<ProvidersProducts> ProvidersProducts { get; private set; }
         public List<Representative> Representative { get; private set; }
 
         public void Update(string providerName, string description, string cNPJ, string site, string emailAddress, string phoneNumber, ProviderTypeEnum providerType)

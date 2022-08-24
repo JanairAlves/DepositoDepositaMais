@@ -12,15 +12,15 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
                 .HasKey(iop => iop.Id);
 
             builder
-                .HasOne(iop => iop.Products)
-                .WithMany()
-                .HasForeignKey(iop => iop.ProductId)
+                .HasOne(iop => iop.IncomingOrder)
+                .WithMany(io => io.IncomingOrderProducts)
+                .HasForeignKey(iop => iop.IncomingOrderId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(iop => iop.IncomingOrders)
-                .WithMany()
-                .HasForeignKey(io => io.IncomingOrderId)
+                .HasOne(iop => iop.Product)
+                .WithMany(p => p.IncomingOrderProducts)
+                .HasForeignKey(iop => iop.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

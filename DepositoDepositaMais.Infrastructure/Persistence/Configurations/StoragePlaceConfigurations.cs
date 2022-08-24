@@ -1,11 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
 {
@@ -17,9 +12,9 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
                 .HasKey(s => s.Id);
 
             builder
-                .HasMany(sp => sp.Product)
-                .WithOne()
-                .HasForeignKey(s => s.ProductId)
+                .HasOne(s => s.Deposit)
+                .WithMany(d => d.StoragePlaces)
+                .HasForeignKey(s => s.DepositId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

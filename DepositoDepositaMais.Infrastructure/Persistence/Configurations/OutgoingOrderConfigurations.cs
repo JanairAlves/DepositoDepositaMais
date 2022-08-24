@@ -1,11 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
 {
@@ -26,6 +21,12 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
                 .HasOne(oo => oo.Representative)
                 .WithMany(r => r.OutgoingOrders)
                 .HasForeignKey(oo => oo.RepresentativeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(oo => oo.OutgoingInvoice)
+                .WithMany(oi => oi.OutgoingOrders)
+                .HasForeignKey(oo => oo.OutgoingInvoiceId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

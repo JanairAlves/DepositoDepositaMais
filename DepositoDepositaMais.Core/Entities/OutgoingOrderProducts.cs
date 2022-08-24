@@ -11,9 +11,9 @@ namespace DepositoDepositaMais.Core.Entities
         }
 
         public int OutgoingOrderId { get; private set; }
-        public List<OutgoingOrder> OutgoingOrders { get; private set; }
+        public OutgoingOrder OutgoingOrder { get; private set; }
         public int ProductId { get; private set; }
-        public List<Product> Products { get; private set; }
+        public Product Product { get; private set; }
 
     }
 }

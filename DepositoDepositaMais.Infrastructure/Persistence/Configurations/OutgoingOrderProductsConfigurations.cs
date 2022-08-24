@@ -1,11 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
 {
@@ -17,15 +12,14 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
                 .HasKey(iop => iop.Id);
 
             builder
-                .HasOne(oop => oop.Products)
-                .WithMany()
+                .HasOne(oop => oop.Product)
+                .WithMany(p => p.OutgoingOrderProducts)
                 .HasForeignKey(oop => oop.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
-
             builder
-                .HasMany(oop => oop.OutgoingOrders)
-                .WithOne()
-                .HasForeignKey(oo => oo.OutgoingOrderId)
+                .HasOne(oop => oop.OutgoingOrder)
+                .WithMany(oo => oo.OutgoingOrderProducts)
+                .HasForeignKey(oop => oop.OutgoingOrderId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

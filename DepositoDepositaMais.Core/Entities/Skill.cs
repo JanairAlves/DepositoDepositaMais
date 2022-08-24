@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -12,5 +13,6 @@ namespace DepositoDepositaMais.Core.Entities
 
         public string Description { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public List<UserSkill> UserSkills { get; private set; }
     }
 }

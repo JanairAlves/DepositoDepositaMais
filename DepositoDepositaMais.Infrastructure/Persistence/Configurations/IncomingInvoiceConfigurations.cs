@@ -10,12 +10,6 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
         {
             builder
                 .HasKey(ii => ii.Id);
-
-            builder
-                .HasMany(ii => ii.IncomingOrders)
-                .WithOne()
-                .HasForeignKey(ii => ii.IncomingOrderId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

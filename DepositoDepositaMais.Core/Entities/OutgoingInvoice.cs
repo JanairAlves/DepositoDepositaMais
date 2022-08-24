@@ -19,11 +19,6 @@ namespace DepositoDepositaMais.Core.Entities
             SubmittedIn = submittedIn;
         }
 
-        public Deposit Deposit { get; set; }
-        public Representative Representative { get; set; }
-        public int DepositId { get; private set; }
-        public int StoragePlaceId { get; private set; }
-        public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }
         public string Description { get; private set; }
@@ -31,6 +26,9 @@ namespace DepositoDepositaMais.Core.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime SubmittedIn { get; private set; }
 
+        public int DepositId { get; private set; }
+        public int StoragePlaceId { get; private set; }
+        public int ProductId { get; private set; }
         public List<OutgoingOrder> OutgoingOrders { get; private set; }
 
         public void Update(int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime submittedIn)

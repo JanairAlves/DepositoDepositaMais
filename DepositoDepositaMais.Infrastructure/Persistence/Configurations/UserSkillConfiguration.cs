@@ -10,6 +10,19 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
         {
             builder
                 .HasKey(us => us.Id);
+
+            builder
+                .HasOne(us => us.User)
+                .WithMany(u => u.Skills)
+                .HasForeignKey(us => us.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(us => us.Skill)
+                .WithMany(s => s.UserSkills)
+                .HasForeignKey(us => us.SkillId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

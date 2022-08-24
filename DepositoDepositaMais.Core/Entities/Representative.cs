@@ -20,8 +20,6 @@ namespace DepositoDepositaMais.Core.Entities
         }
 
         public int RepresentativeId { get; private set; }
-        public int ProviderId { get; private set; }
-        //public List<Provider> Provider { get; private set; }
         public string RepresentativeName { get; private set; }
         public DateTime Birthday { get; private set; }
         public string CPF { get; private set; }
@@ -30,7 +28,8 @@ namespace DepositoDepositaMais.Core.Entities
         public string Description { get; private set; }
         public RepresentativeStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
-
+        public int ProviderId { get; private set; }
+        public Provider Provider { get; private set; }
         public List<IncomingOrder> IncomingOrders { get; private set; }
         public List<OutgoingOrder> OutgoingOrders { get; private set; }
 

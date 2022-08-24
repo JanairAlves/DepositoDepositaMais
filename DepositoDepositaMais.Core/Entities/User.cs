@@ -17,12 +17,12 @@ namespace DepositoDepositaMais.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public int UserId { get; private set; }
         public string FullName { get; private set; }
         public string Email { get; private set; }
         public DateTime BirthDate { get; private set; }
         public UserStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public int DepositId { get; private set; }
         public Deposit Deposit { get; private set; }
         public List<UserSkill> Skills { get; private set; }
 

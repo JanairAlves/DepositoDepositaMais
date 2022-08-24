@@ -20,18 +20,21 @@ namespace DepositoDepositaMais.Core.Entities
         }
 
         public string ProductId { get; private set; }
-        public int ProviderId { get; private set; }
-        public int CategoryId { get; private set; }
-        public Category Category { get; private set; }
         public string ProductName { get; private set; }
         public string Description { get; private set; }
         public string PackagingType { get; private set; }
         public string QuantityPackaging { get; private set; }
         public ProductStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        //public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
-        //public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
-        //public List<ProvidersProducts> ProvidersProducts { get; private set; }
+        
+        public int StoragePlaceId { get; private set; }
+        public StoragePlace StoragePlace { get; private set; }
+        public int CategoryId { get; private set; }
+        public Category Category { get; private set; }
+        public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }
+        public List<IncomingOrderProducts> IncomingOrderProducts { get; private set; }
+        public int ProviderId { get; private set; }
+        public List<ProvidersProducts> ProvidersProducts { get; private set; }
 
         public void Update(string productId, int providerId, string productName, string description, string packagingType, string quantityPackaging)
         {

@@ -11,8 +11,8 @@ namespace DepositoDepositaMais.Core.Entities
         }
 
         public int IncomingOrderId { get; private set; }
-        public List<IncomingOrder> IncomingOrders { get; private set; }
+        public IncomingOrder IncomingOrder { get; private set; }
         public int ProductId { get; private set; }
-        public List<Product> Products { get; private set; }
+        public Product Product { get; private set; }
     }
 }

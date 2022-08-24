@@ -1,6 +1,5 @@
 ﻿using DepositoDepositaMais.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace DepositoDepositaMais.Infrastructure.Persistence
@@ -9,8 +8,6 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
     {
         public DepositoDepositaMaisDbContext(DbContextOptions<DepositoDepositaMaisDbContext> options) : base(options)
         {
-            //Debugger.Launch();
-            //Debugger.Break();
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -32,9 +29,6 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IncomingOrder>().HasKey(io => io.Id);
-
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

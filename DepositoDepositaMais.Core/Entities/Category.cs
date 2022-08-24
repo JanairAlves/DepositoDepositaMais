@@ -1,5 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DepositoDepositaMais.Core.Entities
 {
@@ -13,11 +14,12 @@ namespace DepositoDepositaMais.Core.Entities
             Status = CategoryStatusEnum.Active;
         }
 
-        public Product Product { get; private set; }
         public string CategoryName { get; private set; }
         public string Description { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public CategoryStatusEnum Status { get; private set; }
+
+        public List<Product> Products { get; private set; }
 
         public void Update(string categoryName, string description)
         {

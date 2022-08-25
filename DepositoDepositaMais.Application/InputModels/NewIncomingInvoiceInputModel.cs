@@ -24,12 +24,6 @@ namespace DepositoDepositaMais.Application.InputModels
         public string CarrierStateRegistration { get; private set; }
         #endregion 
 
-        #region Dados dos produtos
-        public int ProductId { get; private set; }
-        public int QuantityOfProducts { get; private set; }
-        public decimal Value { get; private set; }
-        #endregion
-
         #region Dados da carga
         public int WeightOfTheCargo { get; private set; }
         public TypeOfVolumeEnum TypeOfVolume { get; private set; }

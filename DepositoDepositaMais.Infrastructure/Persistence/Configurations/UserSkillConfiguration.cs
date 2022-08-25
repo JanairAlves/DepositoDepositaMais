@@ -13,7 +13,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
 
             builder
                 .HasOne(us => us.User)
-                .WithMany(u => u.Skills)
+                .WithMany(u => u.UserSkills)
                 .HasForeignKey(us => us.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace DepositoDepositaMais.Core.Entities
 {
     public class ProvidersProducts : BaseEntity

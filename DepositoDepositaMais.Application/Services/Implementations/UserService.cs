@@ -60,7 +60,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 user.FullName,
                 user.Email,
                 user.BirthDate,
-                user.Skills,
+                user.UserSkills,
                 user.Status,
                 user.CreatedAt
                 );

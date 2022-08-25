@@ -9,8 +9,7 @@ namespace DepositoDepositaMais.Core.Entities
         public IncomingInvoice(string companyName, string companyAddress, string cNPJCompany, string cPFCompany, 
             string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, 
             string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, 
-            int productId, int quantityOfProducts, decimal value, TypeOfVolumeEnum typeOfVolume, 
-            int weightOfTheCargo, string description, DateTime receivedIn)
+            TypeOfVolumeEnum typeOfVolume,  int weightOfTheCargo, string description, DateTime receivedIn)
         {
             CompanyName = companyName;
             CompanyAddress = companyAddress;
@@ -24,11 +23,6 @@ namespace DepositoDepositaMais.Core.Entities
             CPFCarrier = cPFCarrier;
             CarrierAdress = carrierAdress;
             CarrierStateRegistration = carrierStateRegistration;
-
-            ProductId = productId;
-            QuantityOfProducts = quantityOfProducts;
-            Value = value;
-
             TypeOfVolume = typeOfVolume;
             WeightOfTheCargo = weightOfTheCargo;
 
@@ -57,12 +51,6 @@ namespace DepositoDepositaMais.Core.Entities
         public string CarrierStateRegistration { get; private set; }
         #endregion 
 
-        #region Dados dos produtos
-        public int ProductId { get; private set; }
-        public int QuantityOfProducts { get; private set; }
-        public decimal Value { get; private set; }
-        #endregion
-
         #region Dados da carga
         public TypeOfVolumeEnum TypeOfVolume { get; private set; }
         public int WeightOfTheCargo { get; private set; }
@@ -75,15 +63,13 @@ namespace DepositoDepositaMais.Core.Entities
         public DateTime CreatedAt { get; private set; }
         #endregion
 
-        #region pedidos
         public List<IncomingOrder> IncomingOrders { get; private set; }
-        #endregion
 
         public void Update(string companyName, string companyAddress, string cNPJCompany, string cPFCompany, 
             string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, string carPlate, 
-            string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, int productId,
-            decimal value, int quantityOfProducts, TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo,
-            IncomingInvoiceStateEnum status, string description, DateTime receivedIn)
+            string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, 
+            TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo, IncomingInvoiceStateEnum status, string description, 
+            DateTime receivedIn)
         {
             CompanyName = companyName;
             CompanyAddress = companyAddress;
@@ -97,9 +83,6 @@ namespace DepositoDepositaMais.Core.Entities
             CPFCarrier = cPFCarrier;
             CarrierAdress = carrierAdress;
             CarrierStateRegistration = carrierStateRegistration;
-            ProductId = productId;
-            QuantityOfProducts = quantityOfProducts;
-            Value = value;
             TypeOfVolume = typeOfVolume;
             WeightOfTheCargo = weightOfTheCargo;
             Status = status;

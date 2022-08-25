@@ -6,9 +6,9 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class Product : BaseEntity
     {
-        public Product(string productId, int providerId, string productName, string description, string quantityPackaging, string packagingType)
+        public Product(string productCode, int providerId, string productName, string description, string quantityPackaging, string packagingType)
         {
-            ProductId = productId;
+            ProductCode = productCode;
             ProviderId = providerId;
             ProductName = productName;
             Description = description;
@@ -19,7 +19,7 @@ namespace DepositoDepositaMais.Core.Entities
             Status = ProductStatusEnum.Active;
         }
 
-        public string ProductId { get; private set; }
+        public string ProductCode { get; private set; }
         public string ProductName { get; private set; }
         public string Description { get; private set; }
         public string PackagingType { get; private set; }
@@ -36,9 +36,9 @@ namespace DepositoDepositaMais.Core.Entities
         public int ProviderId { get; private set; }
         public List<ProvidersProducts> ProvidersProducts { get; private set; }
 
-        public void Update(string productId, int providerId, string productName, string description, string packagingType, string quantityPackaging)
+        public void Update(string productCode, int providerId, string productName, string description, string packagingType, string quantityPackaging)
         {
-            ProductId = productId;
+            ProductCode = productCode;
             ProviderId = providerId;
             ProductName = productName;
             Description = description;

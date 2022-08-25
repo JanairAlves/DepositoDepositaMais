@@ -25,7 +25,6 @@ namespace DepositoDepositaMais.Core.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime ExpectedDeliveryIn { get; private set; }
 
-        public int IncomingOrderId { get; private set; }
         public int DepositId { get; private set; }
         public Deposit Deposit { get; private set; }
         public int RepresentativeId { get; private set; }

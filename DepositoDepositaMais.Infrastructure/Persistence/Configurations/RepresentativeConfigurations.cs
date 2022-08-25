@@ -14,7 +14,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
             builder
                 .HasOne(r => r.Provider)
                 .WithMany(p => p.Representatives)
-                .HasForeignKey(r => r.RepresentativeId)
+                .HasForeignKey(r => r.ProviderId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

@@ -35,10 +35,6 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.CarrierAdress,
                 inputModel.CarrierStateRegistration,
 
-                inputModel.ProductId,
-                inputModel.QuantityOfProducts,
-                inputModel.Value,
-
                 inputModel.TypeOfVolume,
                 inputModel.WeightOfTheCargo,
 
@@ -68,10 +64,6 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.CarrierAdress,
                 inputModel.CarrierStateRegistration,
                 
-                inputModel.ProductId,
-                inputModel.Value,
-                inputModel.QuantityOfProducts,
-
                 inputModel.TypeOfVolume,
                 inputModel.WeightOfTheCargo,
                 
@@ -116,7 +108,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 incomingInvoice.CPFCarrier,
                 incomingInvoice.CarrierAdress,
                 incomingInvoice.CarrierStateRegistration,
-                incomingInvoice.QuantityOfProducts,
+
                 incomingInvoice.TypeOfVolume,
                 incomingInvoice.WeightOfTheCargo
                 );

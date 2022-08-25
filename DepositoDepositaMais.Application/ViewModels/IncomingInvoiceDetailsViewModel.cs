@@ -4,7 +4,10 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class IncomingInvoiceDetailsViewModel
     {
-        public IncomingInvoiceDetailsViewModel(int id, string companyName, string companyAddress, string cNPJCompany, string cPFCompany, string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, int quantityOfProducts, TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo)
+        public IncomingInvoiceDetailsViewModel(int id, string companyName, string companyAddress, string cNPJCompany, 
+            string cPFCompany, string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, 
+            string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, 
+            TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo)
         {
             Id = id;
             CompanyName = companyName;
@@ -19,7 +22,6 @@ namespace DepositoDepositaMais.Application.ViewModels
             CPFCarrier = cPFCarrier;
             CarrierAdress = carrierAdress;
             CarrierStateRegistration = carrierStateRegistration;
-            QuantityOfProducts = quantityOfProducts;
             TypeOfVolume = typeOfVolume;
             WeightOfTheCargo = weightOfTheCargo;
         }
@@ -44,7 +46,6 @@ namespace DepositoDepositaMais.Application.ViewModels
         #endregion 
 
         #region Dados dos produtos
-        public int QuantityOfProducts { get; private set; }
         public TypeOfVolumeEnum TypeOfVolume { get; private set; }
         public int WeightOfTheCargo { get; private set; }
         #endregion 

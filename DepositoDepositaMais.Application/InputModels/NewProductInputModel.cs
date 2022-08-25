@@ -5,7 +5,7 @@ namespace DepositoDepositaMais.Application.InputModels
 {
     public class NewProductInputModel
     {
-        public string ProductId { get; private set; }
+        public string ProductCode { get; private set; }
         public int ProviderId { get; private set; }
         public string ProductName { get; private set; }
         public string Description { get; private set; }

@@ -25,6 +25,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
             _dbContext.Categories.Add(category);
 
+            _dbContext.SaveChanges();
+
             return category.Id;
         }
 
@@ -35,6 +37,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             category.Update(
                 inputModel.CategoryName, 
                 inputModel.Description);
+
+            _dbContext.SaveChanges();
         }
 
         public List<CategoryViewModel> GetAll(string query)
@@ -68,12 +72,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var category = _dbContext.Categories.SingleOrDefault(c => c.Id == id);
             category.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteCategory(int id)
         {
             var category = _dbContext.Categories.SingleOrDefault(c => c.Id == id);
             category.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

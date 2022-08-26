@@ -29,6 +29,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.StoragePlace.Add(storagePlace);
 
+            _dbContext.SaveChanges();
+
             return storagePlace.Id;
         }
 
@@ -40,7 +42,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.MinimumQuantity,
                 inputModel.MaximumQuantity,
                 inputModel.Street
-                );            
+                );
+
+            _dbContext.SaveChanges();
         }
 
         public List<StoragePlaceViewModel> GetAll(string query)

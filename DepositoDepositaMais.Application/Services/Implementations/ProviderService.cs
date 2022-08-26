@@ -29,7 +29,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.ProviderType
                 );
             _dbContext.Providers.Add(provider);
-             
+
+            _dbContext.SaveChanges();
+
             return provider.Id;
         }
 
@@ -45,6 +47,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.PhoneNumber,
                 inputModel.ProviderType
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<ProviderViewModel> GetAll(string query)
@@ -85,12 +89,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == id);
             provider.Activate();
+
+            _dbContext.SaveChanges();
         }
     
         public void DeleteProvider(int id)
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == id);
             provider.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

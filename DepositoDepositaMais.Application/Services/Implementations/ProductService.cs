@@ -29,6 +29,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.Products.Add(product);
 
+            _dbContext.SaveChanges();
+
             return product.Id;
         }
 
@@ -43,6 +45,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 product.PackagingType,
                 product.QuantityPackaging
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<ProductViewModel> GetAll(string query)
@@ -81,12 +85,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
             product.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteProduct(int id)
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
             product.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

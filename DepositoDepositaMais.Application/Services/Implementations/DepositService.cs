@@ -25,6 +25,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
             _dbContext.Deposits.Add(deposit);
 
+            _dbContext.SaveChanges();
+
             return deposit.Id;
         }
 
@@ -35,6 +37,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.DepositName, 
                 inputModel.Description, 
                 inputModel.CNPJ);
+
+            _dbContext.SaveChanges();
         }
 
         public List<DepositViewModel> GetAll(string query)
@@ -66,12 +70,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == id);
             deposit.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteDeposit(int id)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == id);
             deposit.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

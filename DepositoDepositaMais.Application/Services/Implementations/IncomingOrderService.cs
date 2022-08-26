@@ -30,6 +30,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.IncomingOrders.Add(incomingOrder);
 
+            _dbContext.SaveChanges();
+
             return incomingOrder.Id;
         }
 
@@ -42,6 +44,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Description,
                 inputModel.ExpectedDeliveryIn
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<IncomingOrderViewModel> GetAll(string query)
@@ -82,12 +86,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
             incomingOrder.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteIncomingOrder(int id)
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
             incomingOrder.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

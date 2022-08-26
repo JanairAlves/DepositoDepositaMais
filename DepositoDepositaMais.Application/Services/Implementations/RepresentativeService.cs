@@ -31,6 +31,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.Representatives.Add(representative);
 
+            _dbContext.SaveChanges();
+
             return representative.Id;
         }
 
@@ -46,6 +48,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Email,
                 inputModel.Description
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<RepresentativeViewModel> GetAll(string query)
@@ -86,12 +90,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
             representative.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteRepresentative(int id)
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
             representative.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

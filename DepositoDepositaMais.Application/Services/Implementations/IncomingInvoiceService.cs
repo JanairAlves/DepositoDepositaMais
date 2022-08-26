@@ -43,6 +43,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.IncomingInvoices.Add(incomingInvoice);
 
+            _dbContext.SaveChanges();
+
             return incomingInvoice.Id;
         }
 
@@ -71,6 +73,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Description,
                 inputModel.ReceivedIn
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<IncomingInvoiceViewModel> GetAll(string query)
@@ -120,12 +124,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == id);
             incomingInvoice.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteIncomingInvoice(int id)
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == id);
             incomingInvoice.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

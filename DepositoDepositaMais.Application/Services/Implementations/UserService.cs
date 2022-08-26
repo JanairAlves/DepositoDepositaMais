@@ -25,6 +25,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.BirthDate
                 );
 
+            _dbContext.SaveChanges();
+
             return user.Id;
         }
 
@@ -37,6 +39,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.BirthDate,
                 inputModel.Skill
                 );
+
+            _dbContext.SaveChanges();
         }
 
         public List<UserViewModel> GetAll(string query)
@@ -72,12 +76,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
             user.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteUser(int id)
         {
             var user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
             user.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 );
             _dbContext.OutgoingOrders.Add(outgoingOrder);
 
+            _dbContext.SaveChanges();
+
             return outgoingOrder.Id;
         }
 
@@ -43,7 +45,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Value,
                 inputModel.Description,
                 inputModel.SendIn
-                );           
+                );
+
+            _dbContext.SaveChanges();
         }
 
         public List<OutgoingOrderViewModel> GetAll(string query)
@@ -85,12 +89,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
             outgoingOrder.Activate();
+
+            _dbContext.SaveChanges();
         }
 
         public void DeleteOutgoingOrder(int id)
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
             outgoingOrder.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

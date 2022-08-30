@@ -5,7 +5,7 @@ namespace DepositoDepositaMais.Application.InputModels
     public class UpdateOutgoingInvoiceInputModel
     {
         public int Id { get; }
-        public int StoragePlaceId { get; private set; }
+        public int StorageLocationId { get; private set; }
         public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }

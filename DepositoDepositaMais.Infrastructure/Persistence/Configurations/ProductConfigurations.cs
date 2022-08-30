@@ -18,9 +18,9 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
-                .HasOne(p => p.StoragePlace)
+                .HasOne(p => p.StorageLocation)
                 .WithMany(sp => sp.Products)
-                .HasForeignKey(p => p.StoragePlaceId)
+                .HasForeignKey(p => p.StorageLocationId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

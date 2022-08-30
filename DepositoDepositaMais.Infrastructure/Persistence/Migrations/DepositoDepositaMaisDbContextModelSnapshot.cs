@@ -228,7 +228,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoragePlaceId")
+                    b.Property<int>("StorageLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SubmittedIn")
@@ -276,7 +276,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoragePlaceId")
+                    b.Property<int>("StorageLocationId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Value")
@@ -349,14 +349,14 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoragePlaceId")
+                    b.Property<int>("StorageLocationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("StoragePlaceId");
+                    b.HasIndex("StorageLocationId");
 
                     b.ToTable("Products");
                 });
@@ -486,7 +486,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.ToTable("Skills");
                 });
 
-            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StoragePlace", b =>
+            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StorageLocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -515,7 +515,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("DepositId");
 
-                    b.ToTable("StoragePlace");
+                    b.ToTable("StorageLocation");
                 });
 
             modelBuilder.Entity("DepositoDepositaMais.Core.Entities.User", b =>
@@ -668,15 +668,15 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DepositoDepositaMais.Core.Entities.StoragePlace", "StoragePlace")
+                    b.HasOne("DepositoDepositaMais.Core.Entities.StorageLocation", "StorageLocation")
                         .WithMany("Products")
-                        .HasForeignKey("StoragePlaceId")
+                        .HasForeignKey("StorageLocationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("StoragePlace");
+                    b.Navigation("StorageLocation");
                 });
 
             modelBuilder.Entity("DepositoDepositaMais.Core.Entities.Provider", b =>
@@ -720,10 +720,10 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Navigation("Provider");
                 });
 
-            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StoragePlace", b =>
+            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StorageLocation", b =>
                 {
                     b.HasOne("DepositoDepositaMais.Core.Entities.Deposit", "Deposit")
-                        .WithMany("StoragePlaces")
+                        .WithMany("StorageLocations")
                         .HasForeignKey("DepositId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -774,7 +774,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
 
                     b.Navigation("Providers");
 
-                    b.Navigation("StoragePlaces");
+                    b.Navigation("StorageLocations");
 
                     b.Navigation("Users");
                 });
@@ -827,7 +827,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Navigation("UserSkills");
                 });
 
-            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StoragePlace", b =>
+            modelBuilder.Entity("DepositoDepositaMais.Core.Entities.StorageLocation", b =>
                 {
                     b.Navigation("Products");
                 });

@@ -6,7 +6,7 @@ namespace DepositoDepositaMais.Application.InputModels
     public class NewOutgoingOrderInputModel
     {
         public int DepositId { get; private set; }
-        public int StoragePlaceId { get; private set; }
+        public int StorageLocationId { get; private set; }
         public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }

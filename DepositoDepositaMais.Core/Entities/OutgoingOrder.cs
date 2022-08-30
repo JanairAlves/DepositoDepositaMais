@@ -6,10 +6,10 @@ namespace DepositoDepositaMais.Core.Entities
 {
     public class OutgoingOrder : BaseEntity
     {
-        public OutgoingOrder(int depositId, int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime sendIn)
+        public OutgoingOrder(int depositId, int storageLocationId, int productId, int quantity, decimal value, string description, DateTime sendIn)
         {
             DepositId = depositId;
-            StoragePlaceId = storagePlaceId;
+            StorageLocationId = storageLocationId;
             ProductId = productId;
             Quantity = quantity;
             Value = value;
@@ -26,7 +26,7 @@ namespace DepositoDepositaMais.Core.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime SendIn { get; private set; }
 
-        public int StoragePlaceId { get; private set; }
+        public int StorageLocationId { get; private set; }
         public int ProductId { get; private set; }
         public int DepositId { get; private set; }
         public Deposit Deposit { get; private set; }
@@ -36,9 +36,9 @@ namespace DepositoDepositaMais.Core.Entities
         public int OutgoingInvoiceId { get; private set; }
         public OutgoingInvoice OutgoingInvoice { get; private set; }
 
-        public void Update(int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime sendIn)
+        public void Update(int storageLocationId, int productId, int quantity, decimal value, string description, DateTime sendIn)
         {
-            StoragePlaceId = storagePlaceId;
+            StorageLocationId = storageLocationId;
             ProductId = productId;
             Quantity = quantity;
             Value = value;

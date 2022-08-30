@@ -4,9 +4,9 @@ namespace DepositoDepositaMais.Application.InputModels
 {
     public class UpdateOutgoingOrderInputModel
     {
-        public UpdateOutgoingOrderInputModel(int storagePlaceId, int productId, int quantity, decimal value, string description, DateTime sendIn)
+        public UpdateOutgoingOrderInputModel(int storageLocationId, int productId, int quantity, decimal value, string description, DateTime sendIn)
         {
-            StoragePlaceId = storagePlaceId;
+            StorageLocationId = storageLocationId;
             ProductId = productId;
             Quantity = quantity;
             Value = value;
@@ -15,7 +15,7 @@ namespace DepositoDepositaMais.Application.InputModels
         }
 
         public int Id { get; }
-        public int StoragePlaceId { get; private set; }
+        public int StorageLocationId { get; private set; }
         public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }

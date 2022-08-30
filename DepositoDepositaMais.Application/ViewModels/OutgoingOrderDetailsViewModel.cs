@@ -9,11 +9,11 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class OutgoingOrderDetailsViewModel
     {
-        public OutgoingOrderDetailsViewModel(int id, int depositId, int storagePlaceId, int productId, int quantity, decimal value, string description, OutgoingOrderStatusEnum status, DateTime createdAt, DateTime sendIn)
+        public OutgoingOrderDetailsViewModel(int id, int depositId, int storageLocationId, int productId, int quantity, decimal value, string description, OutgoingOrderStatusEnum status, DateTime createdAt, DateTime sendIn)
         {
             Id = id;
             DepositId = depositId;
-            StoragePlaceId = storagePlaceId;
+            StorageLocationId = storageLocationId;
             ProductId = productId;
             Quantity = quantity;
             Value = value;
@@ -25,7 +25,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 
         public int Id { get; }
         public int DepositId { get; private set; }
-        public int StoragePlaceId { get; private set; }
+        public int StorageLocationId { get; private set; }
         public int ProductId { get; private set; }
         public int Quantity { get; private set; }
         public decimal Value { get; private set; }

@@ -27,8 +27,8 @@ namespace DepositoDepositaMais.Core.Entities
         public ProductStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         
-        public int StoragePlaceId { get; private set; }
-        public StoragePlace StoragePlace { get; private set; }
+        public int StorageLocationId { get; private set; }
+        public StorageLocation StorageLocation { get; private set; }
         public int CategoryId { get; private set; }
         public Category Category { get; private set; }
         public List<OutgoingOrderProducts> OutgoingOrderProducts { get; private set; }

@@ -59,7 +59,7 @@ namespace DepositoDepositaMais.API.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/activate")]
         public IActionResult Activate(int id)
         {
             _outgoingInvoiceService.ActivateOutgoingInvoice(id);

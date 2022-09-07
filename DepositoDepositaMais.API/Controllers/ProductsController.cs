@@ -60,7 +60,7 @@ namespace DepositoDepositaMais.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/activate")]
         public IActionResult Activate(int id)
         {
             _productService.ActivateProduct(id);

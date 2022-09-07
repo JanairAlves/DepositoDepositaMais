@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

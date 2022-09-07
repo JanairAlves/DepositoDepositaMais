@@ -38,7 +38,7 @@ namespace DepositoDepositaMais.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/activate")]
         public IActionResult Put(int id, [FromBody] UpdateStorageLocationViewModel inputModel)
         {
             _StorageLocationService.UpdateStorageLocation(inputModel);

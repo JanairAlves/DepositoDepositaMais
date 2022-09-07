@@ -7,7 +7,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class UserDetailsViewModel
     {
-        public UserDetailsViewModel(string fullName, string email, DateTime birthDate, List<UserSkill> skill, UserStatusEnum status, DateTime createdAt)
+        public UserDetailsViewModel(string fullName, string email, DateTime birthDate, List<UserSkill> skill, UserStatusEnum status, DateTime createdAt, string depositName)
         {
             FullName = fullName;
             Email = email;
@@ -15,6 +15,7 @@ namespace DepositoDepositaMais.Application.ViewModels
             Skill = skill;
             Status = status;
             CreatedAt = createdAt;
+            DepositName = depositName;
         }
 
         public string FullName { get; private set; }
@@ -23,5 +24,7 @@ namespace DepositoDepositaMais.Application.ViewModels
         public List<UserSkill> Skill { get; private set; }
         public UserStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+
+        public string DepositName { get; private set; }
     }
 }

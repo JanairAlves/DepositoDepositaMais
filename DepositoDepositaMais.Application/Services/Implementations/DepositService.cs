@@ -21,7 +21,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var deposit = new Deposit(
                 inputModel.DepositName, 
                 inputModel.Description, 
-                inputModel.CNPJ);
+                inputModel.CNPJ
+                );
 
             _dbContext.Deposits.Add(deposit);
 
@@ -33,10 +34,12 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateDeposit(UpdateDepositInputModel inputModel)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == inputModel.Id);
+
             deposit.Update(
                 inputModel.DepositName, 
                 inputModel.Description, 
-                inputModel.CNPJ);
+                inputModel.CNPJ
+                );
 
             _dbContext.SaveChanges();
         }
@@ -44,9 +47,10 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<DepositViewModel> GetAll(string query)
         {
             var deposits = _dbContext.Deposits;
+
             var depositsViewModel = deposits
-                .Select(d => new DepositViewModel(d.Id, d.DepositName))
-                .ToList();
+                .Select(d => new DepositViewModel(d.Id, d.DepositName)
+                ).ToList();
 
             return depositsViewModel;
         }
@@ -54,6 +58,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public DepositDetailsViewModel GetById(int id)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == id);
+
             var depositsDetailsViewModel = new DepositDetailsViewModel(
                 deposit.Id,
                 deposit.DepositName,
@@ -69,6 +74,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateDeposit(int id)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == id);
+
             deposit.Activate();
 
             _dbContext.SaveChanges();
@@ -77,6 +83,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteDeposit(int id)
         {
             var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == id);
+
             deposit.Inactivate();
 
             _dbContext.SaveChanges();

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "61iskwvPcuc5QXC0USdgbtSUK36NUCxmuLlZaYXynlICq56qoLfyl4vEyBUMdv0BxffMwKQrNme2ws1EbXCkdA==",
+  "dgSpecHash": "JNtZ6koIxloRf2AoQHix4NXnUza7j1ljJMfja0tNan6Qhx0JdMX9w2SCinXvE2RA7yPP14wW+aMNonIVFNJiQg==",
   "success": true,
-  "projectFilePath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
+  "projectFilePath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\janai\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

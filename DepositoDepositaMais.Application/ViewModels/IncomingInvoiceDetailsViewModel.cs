@@ -1,4 +1,5 @@
 ﻿using DepositoDepositaMais.Core.Enums;
+using System;
 
 namespace DepositoDepositaMais.Application.ViewModels
 {

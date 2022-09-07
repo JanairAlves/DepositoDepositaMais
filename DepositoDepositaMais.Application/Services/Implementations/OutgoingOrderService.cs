@@ -3,6 +3,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Application.ViewModels;
 using DepositoDepositaMais.Core.Entities;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Description,
                 inputModel.SendIn
                 );
+
             _dbContext.OutgoingOrders.Add(outgoingOrder);
 
             _dbContext.SaveChanges();
@@ -38,6 +40,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateOutgoingOrder(UpdateOutgoingOrderInputModel inputModel)
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == inputModel.Id);
+
             outgoingOrder.Update(
                 inputModel.StorageLocationId,
                 inputModel.ProductId,
@@ -53,6 +56,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<OutgoingOrderViewModel> GetAll(string query)
         {
             var outgoingOrder = _dbContext.OutgoingOrders;
+
             var outgoingOrderViewModel = outgoingOrder
                 .Select(oo => new OutgoingOrderViewModel(
                     oo.Id,
@@ -68,7 +72,11 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public OutgoingOrderDetailsViewModel GetById(int id)
         {
-            var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
+            var outgoingOrder = _dbContext.OutgoingOrders
+                .Include(oo => oo.Deposit)
+                .Include(oo => oo.Representative)
+                .SingleOrDefault(oo => oo.Id == id);
+
             var outgoingOrderDetailsViewModel = new OutgoingOrderDetailsViewModel(
                 outgoingOrder.Id,
                 outgoingOrder.DepositId,
@@ -79,7 +87,13 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 outgoingOrder.Description,
                 outgoingOrder.Status,
                 outgoingOrder.CreatedAt,
-                outgoingOrder.SendIn
+                outgoingOrder.SendIn,
+                outgoingOrder.Deposit.DepositName,
+                outgoingOrder.Deposit.CNPJ,
+                outgoingOrder.Representative.RepresentativeName,
+                outgoingOrder.Representative.CPF,
+                outgoingOrder.Representative.PhoneNumber,
+                outgoingOrder.Representative.Email
                 );
 
             return outgoingOrderDetailsViewModel;
@@ -88,6 +102,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateOutgoingOrder(int id)
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
+
             outgoingOrder.Activate();
 
             _dbContext.SaveChanges();
@@ -96,6 +111,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteOutgoingOrder(int id)
         {
             var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == id);
+
             outgoingOrder.Inactivate();
 
             _dbContext.SaveChanges();

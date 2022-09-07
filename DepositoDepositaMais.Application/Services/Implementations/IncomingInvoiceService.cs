@@ -51,6 +51,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateIncomingInvoice(UpdateIncomingInvoiceInputModel inputModel)
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == inputModel.Id);
+
             incomingInvoice.Update(
                 inputModel.CompanyName,
                 inputModel.CompanyAddress,
@@ -80,6 +81,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<IncomingInvoiceViewModel> GetAll(string query)
         {
             var incomingInvoice = _dbContext.IncomingInvoices;
+
             var incomingInvoiceViewModel = incomingInvoice
                 .Select(ii => new IncomingInvoiceViewModel(
                     ii.Id, 
@@ -98,6 +100,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public IncomingInvoiceDetailsViewModel GetById(int id)
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == id);
+
             var incomingInvoiceDetailsViewModel = new IncomingInvoiceDetailsViewModel(
                 incomingInvoice.Id,
                 incomingInvoice.CompanyName,
@@ -123,6 +126,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateIncomingInvoice(int id)
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == id);
+
             incomingInvoice.Activate();
 
             _dbContext.SaveChanges();
@@ -131,6 +135,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteIncomingInvoice(int id)
         {
             var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == id);
+
             incomingInvoice.Inactivate();
 
             _dbContext.SaveChanges();

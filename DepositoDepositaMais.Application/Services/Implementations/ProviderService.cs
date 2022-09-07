@@ -28,6 +28,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.PhoneNumber,
                 inputModel.ProviderType
                 );
+
             _dbContext.Providers.Add(provider);
 
             _dbContext.SaveChanges();
@@ -38,6 +39,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateProvider(UpdateProviderInputModel inputModel)
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == inputModel.Id);
+
             provider.Update(
                 inputModel.providerName,
                 inputModel.Description,
@@ -54,6 +56,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<ProviderViewModel> GetAll(string query)
         {
             var provider = _dbContext.Providers;
+
             var providerViewModel = provider
                 .Select(p => new ProviderViewModel(
                     p.ProviderName,
@@ -69,6 +72,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public ProviderDetailsViewModel GetById(int id)
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == id);
+
             var providerDetailsViewModel = new ProviderDetailsViewModel(
                 provider.Id,
                 provider.ProviderName,
@@ -88,6 +92,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateProvider(int id)
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == id);
+
             provider.Activate();
 
             _dbContext.SaveChanges();
@@ -96,6 +101,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteProvider(int id)
         {
             var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == id);
+
             provider.Inactivate();
 
             _dbContext.SaveChanges();

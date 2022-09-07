@@ -3,6 +3,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Application.ViewModels;
 using DepositoDepositaMais.Core.Entities;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,6 +28,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.PackagingType,
                 inputModel.QuantityPackaging
                 );
+
             _dbContext.Products.Add(product);
 
             _dbContext.SaveChanges();
@@ -37,6 +39,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateProduct(UpdateProductInputModel inputModel)
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == inputModel.Id);
+
             product.Update(
                 product.ProductCode,
                 product.ProviderId,
@@ -52,6 +55,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<ProductViewModel> GetAll(string query)
         {
             var product = _dbContext.Products;
+
             var productViewModel = product
                 .Select(p => new ProductViewModel(
                     p.ProductCode,
@@ -66,7 +70,11 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public ProductDetailsViewModel GetById(int id)
         {
-            var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+            var product = _dbContext.Products
+                .Include(p => p.StorageLocation)
+                .Include(p => p.Category)
+                .SingleOrDefault(p => p.Id == id);
+
             var productDetailsViewModel = new ProductDetailsViewModel(
                 product.ProductCode,
                 product.ProviderId,
@@ -75,7 +83,10 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 product.PackagingType,
                 product.QuantityPackaging,
                 product.Status,
-                product.CreatedAt
+                product.CreatedAt,
+                product.StorageLocation.Id,
+                product.StorageLocation.Street,
+                product.Category.CategoryName
                );
 
             return productDetailsViewModel;
@@ -84,6 +95,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateProduct(int id)
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+
             product.Activate();
 
             _dbContext.SaveChanges();
@@ -92,6 +104,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteProduct(int id)
         {
             var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+
             product.Inactivate();
 
             _dbContext.SaveChanges();

@@ -3,6 +3,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Application.ViewModels;
 using DepositoDepositaMais.Core.Entities;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateUser(UpdateUserInputModel inputModel)
         {
             var user = _dbContext.Users.SingleOrDefault(u => u.Id == inputModel.Id);
+
             user.Update(
                 inputModel.FullName,
                 inputModel.Email,
@@ -46,6 +48,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<UserViewModel> GetAll(string query)
         {
             var user = _dbContext.Users;
+
             var userViewModel = user
                 .Select(u => new UserViewModel(
                     u.FullName,
@@ -59,14 +62,18 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public UserDetailsViewModel GetById(int id)
         {
-            var user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
+            var user = _dbContext.Users
+                .Include(u => u.Deposit)
+                .SingleOrDefault(u => u.Id == id);
+
             var userDetailsViewModel = new UserDetailsViewModel(
                 user.FullName,
                 user.Email,
                 user.BirthDate,
                 user.UserSkills,
                 user.Status,
-                user.CreatedAt
+                user.CreatedAt,
+                user.Deposit.DepositName
                 );
 
             return userDetailsViewModel;
@@ -75,6 +82,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateUser(int id)
         {
             var user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
+
             user.Activate();
 
             _dbContext.SaveChanges();
@@ -83,6 +91,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteUser(int id)
         {
             var user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
+
             user.Inactivate();
 
             _dbContext.SaveChanges();

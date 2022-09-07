@@ -6,7 +6,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class ProductDetailsViewModel
     {
-        public ProductDetailsViewModel(string productCode, int providerId, string productName, string description, string packagingType, string quantityPackaging, ProductStatusEnum status, DateTime createdAt)
+        public ProductDetailsViewModel(string productCode, int providerId, string productName, string description, string packagingType, string quantityPackaging, ProductStatusEnum status, DateTime createdAt, int storageLocationId, string street, string categoryName)
         {
             ProductCode = productCode;
             ProviderId = providerId;
@@ -16,6 +16,11 @@ namespace DepositoDepositaMais.Application.ViewModels
             QuantityPackaging = quantityPackaging;
             Status = status;
             CreatedAt = createdAt;
+
+            StorageLocationId = storageLocationId;
+            Street = street;
+            
+            CategoryName = categoryName;
         }
 
         public string ProductCode { get; private set; }
@@ -26,5 +31,10 @@ namespace DepositoDepositaMais.Application.ViewModels
         public string QuantityPackaging { get; private set; }
         public ProductStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
+
+        public int StorageLocationId { get; private set; }
+        public string Street { get; private set; }
+
+        public string CategoryName { get; private set; }
     }
 }

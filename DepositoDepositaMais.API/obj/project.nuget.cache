@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "iVUMkZ+bMFzO+f2txdMsusrbCVjo5TSMZgryJeick8BtVFat2eTt53Lv2aH13W5QpZHCbsVhPhOYwL7/MKUMSA==",
+  "dgSpecHash": "1VRnQW39kSP1IDR1pXmoINQnJbGb9RPs2JVyxJw20ja2nzvaJV5QquQi51665c5iE4DmTiQzcB02ZRrRx8U1ug==",
   "success": true,
-  "projectFilePath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.API\\DepositoDepositaMais.API.csproj",
+  "projectFilePath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.API\\DepositoDepositaMais.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\janai\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

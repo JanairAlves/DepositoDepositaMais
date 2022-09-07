@@ -3,6 +3,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Application.ViewModels;
 using DepositoDepositaMais.Core.Entities;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,6 +29,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Status,
                 inputModel.ExpectedDeliveryIn
                 );
+
             _dbContext.IncomingOrders.Add(incomingOrder);
 
             _dbContext.SaveChanges();
@@ -38,6 +40,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateIncomingOrder(UpdateIncomingOrderInputModel inputModel)
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == inputModel.Id);
+
             incomingOrder.Update(
                 inputModel.Quantity,
                 inputModel.Value,
@@ -51,6 +54,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<IncomingOrderViewModel> GetAll(string query)
         {
             var incomingOrder = _dbContext.IncomingOrders;
+
             var incomingOrderViewModel = incomingOrder
                 .Select(io => new IncomingOrderViewModel(
                     io.Id,
@@ -66,7 +70,11 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public IncomingOrderDetailsViewModel GetById(int id)
         {
-            var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
+            var incomingOrder = _dbContext.IncomingOrders
+                .Include(io => io.Deposit)
+                .Include(io => io.Representative)
+                .SingleOrDefault(io => io.Id == id);
+
             var incomingOrderDetailsViewModel = new IncomingOrderDetailsViewModel(
                 incomingOrder.Id,
                 incomingOrder.DepositId,
@@ -76,7 +84,13 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 incomingOrder.Description,
                 incomingOrder.Status,
                 incomingOrder.CreatedAt,
-                incomingOrder.ExpectedDeliveryIn
+                incomingOrder.ExpectedDeliveryIn,
+                incomingOrder.Deposit.DepositName,
+                incomingOrder.Deposit.CNPJ,
+                incomingOrder.Representative.RepresentativeName,
+                incomingOrder.Representative.CPF,
+                incomingOrder.Representative.PhoneNumber,
+                incomingOrder.Representative.Email
                 );
 
             return incomingOrderDetailsViewModel;
@@ -85,6 +99,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateIncomingOrder(int id)
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
+
             incomingOrder.Activate();
 
             _dbContext.SaveChanges();
@@ -93,6 +108,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteIncomingOrder(int id)
         {
             var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == id);
+
             incomingOrder.Inactivate();
 
             _dbContext.SaveChanges();

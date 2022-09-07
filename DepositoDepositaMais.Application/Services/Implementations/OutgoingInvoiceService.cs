@@ -28,6 +28,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Description,
                 inputModel.SubmittedIn
                 );
+
             _dbContext.OutgoingInvoices.Add(outgoingInvoice);
 
             _dbContext.SaveChanges();
@@ -38,6 +39,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateOutgoingInvoice(UpdateOutgoingInvoiceInputModel inputModel)
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == inputModel.Id);
+
             outgoingInvoice.Update(
                 inputModel.StorageLocationId,
                 inputModel.ProductId,
@@ -53,6 +55,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<OutgoingInvoiceViewModel> GetAll(string query)
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices;
+
             var outgoingInvoiceViewModel = outgoingInvoice
                 .Select(oi => new OutgoingInvoiceViewModel(
                     oi.Id,
@@ -69,6 +72,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public OutgoingInvoiceDetailsViewModel GetById(int id)
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == id);
+
             var outgoingInvoiceDetailsViewModel = new OutgoingInvoiceDetailsViewModel(
                 outgoingInvoice.Id,
                 outgoingInvoice.DepositId,
@@ -88,6 +92,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateOutgoingInvoice(int id)
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == id);
+
             outgoingInvoice.Activate();
 
             _dbContext.SaveChanges();
@@ -96,6 +101,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteOutgoingInvoice(int id)
         {
             var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == id);
+
             outgoingInvoice.Inactivate();
 
             _dbContext.SaveChanges();

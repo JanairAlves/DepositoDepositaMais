@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj": {}
+    "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj": {}
   },
   "projects": {
-    "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj": {
+    "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
+        "projectUniqueName": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
         "projectName": "DepositoDepositaMais.Application",
-        "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
+        "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\DepositoDepositaMais.Application.csproj",
         "packagesPath": "C:\\Users\\janai\\.nuget\\packages\\",
-        "outputPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\obj\\",
+        "outputPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\janai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
-                "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj"
+              "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
+                "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj"
               },
-              "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj": {
-                "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj"
+              "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj": {
+                "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj"
               }
             }
           }
@@ -46,6 +46,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -65,14 +71,14 @@
         }
       }
     },
-    "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
+    "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj",
+        "projectUniqueName": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj",
         "projectName": "DepositoDepositaMais.Core",
-        "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj",
+        "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj",
         "packagesPath": "C:\\Users\\janai\\.nuget\\packages\\",
-        "outputPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\obj\\",
+        "outputPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\janai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -119,14 +125,14 @@
         }
       }
     },
-    "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj": {
+    "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj",
         "projectName": "DepositoDepositaMais.Infrastructure",
-        "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj",
+        "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\DepositoDepositaMais.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\janai\\.nuget\\packages\\",
-        "outputPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\obj\\",
+        "outputPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\janai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -143,8 +149,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
-                "projectPath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj"
+              "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj": {
+                "projectPath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.Core\\DepositoDepositaMais.Core.csproj"
               }
             }
           }

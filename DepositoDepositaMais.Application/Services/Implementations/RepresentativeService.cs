@@ -3,6 +3,7 @@ using DepositoDepositaMais.Application.Services.Interfaces;
 using DepositoDepositaMais.Application.ViewModels;
 using DepositoDepositaMais.Core.Entities;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.Email,
                 inputModel.Description
                 );
+
             _dbContext.Representatives.Add(representative);
 
             _dbContext.SaveChanges();
@@ -39,6 +41,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void UpdateRepresentative(UpdateRepresentativeInputModel inputModel)
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == inputModel.Id);
+
             representative.Update(
                 inputModel.ProviderId,
                 inputModel.RepresentativeName,
@@ -55,6 +58,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public List<RepresentativeViewModel> GetAll(string query)
         {
             var representative = _dbContext.Representatives;
+
             var representativeViewModel = representative
                 .Select(r => new RepresentativeViewModel(
                     r.ProviderId,
@@ -69,7 +73,10 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public RepresentativeDetailsViewModel GetById(int id)
         {
-            var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
+            var representative = _dbContext.Representatives
+                .Include(r => r.Provider)
+                .SingleOrDefault(r => r.Id == id);
+
             var representativeDetailsViewModel = new RepresentativeDetailsViewModel(
                 representative.Id,
                 representative.ProviderId,
@@ -80,7 +87,9 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 representative.Email,
                 representative.Description,
                 representative.Status,
-                representative.CreatedAt
+                representative.CreatedAt,
+                representative.Provider.ProviderName,
+                representative.Provider.CNPJ
                 );
             
             return representativeDetailsViewModel;
@@ -89,6 +98,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void ActivateRepresentative(int id)
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
+
             representative.Activate();
 
             _dbContext.SaveChanges();
@@ -97,6 +107,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
         public void DeleteRepresentative(int id)
         {
             var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == id);
+
             representative.Inactivate();
 
             _dbContext.SaveChanges();

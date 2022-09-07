@@ -21,8 +21,8 @@ namespace DepositoDepositaMais.Application.Services.Implementations
             var skills = _dbContext.Skills;
 
             var skillsViewModel = skills
-                .Select(s => new SkillViewModel(s.Id, s.Description))
-                .ToList();
+                .Select(s => new SkillViewModel(s.Id, s.Description)
+                ).ToList();
 
             return skillsViewModel;
         }

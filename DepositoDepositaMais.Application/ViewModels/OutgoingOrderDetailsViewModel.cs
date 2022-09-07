@@ -9,7 +9,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class OutgoingOrderDetailsViewModel
     {
-        public OutgoingOrderDetailsViewModel(int id, int depositId, int storageLocationId, int productId, int quantity, decimal value, string description, OutgoingOrderStatusEnum status, DateTime createdAt, DateTime sendIn)
+        public OutgoingOrderDetailsViewModel(int id, int depositId, int storageLocationId, int productId, int quantity, decimal value, string description, OutgoingOrderStatusEnum status, DateTime createdAt, DateTime sendIn, string depositName, string cnpj, string representativeName, string cpf, string phoneNumber, string email)
         {
             Id = id;
             DepositId = depositId;
@@ -21,6 +21,14 @@ namespace DepositoDepositaMais.Application.ViewModels
             Status = status;
             CreatedAt = createdAt;
             SendIn = sendIn;
+
+            DepositName = depositName;
+            CNPJ = cnpj;
+
+            RepresentativeName = representativeName;
+            CPF = cpf;
+            PhoneNumber = phoneNumber;
+            Email = email;
         }
 
         public int Id { get; }
@@ -33,5 +41,13 @@ namespace DepositoDepositaMais.Application.ViewModels
         public OutgoingOrderStatusEnum Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime SendIn { get; private set; }
+
+        public string DepositName { get; private set; }
+        public string CNPJ { get; private set; }
+
+        public string RepresentativeName { get; private set; }
+        public string CPF { get; private set; }
+        public string PhoneNumber { get; private set; }
+        public string Email { get; private set; }
     }
 }

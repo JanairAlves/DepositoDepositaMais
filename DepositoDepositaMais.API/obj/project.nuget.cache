@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0YH9rorQ00brePphyyzYMAwr9/KhErBlnMoJ7hcg1Pp7DZvuIQixoyTCRSIsYsHDRPN9+rb8kKwsyBxOOAPQIQ==",
+  "dgSpecHash": "iVUMkZ+bMFzO+f2txdMsusrbCVjo5TSMZgryJeick8BtVFat2eTt53Lv2aH13W5QpZHCbsVhPhOYwL7/MKUMSA==",
   "success": true,
-  "projectFilePath": "D:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.API\\DepositoDepositaMais.API.csproj",
+  "projectFilePath": "d:\\Estudo\\BackEnd\\CSharp\\LuisDev\\DotNET_ProjetoPessoal\\DepositoDepositaMais\\DepositoDepositaMais.API\\DepositoDepositaMais.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\janai\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\janai\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

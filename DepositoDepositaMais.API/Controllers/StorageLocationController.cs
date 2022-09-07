@@ -5,26 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DepositoDepositaMais.API.Controllers
 {
-    [Route("api/StorageLocation")]
+    [Route("api/StorageLocations")]
     public class StorageLocationController : ControllerBase
     {
-        private readonly IStorageLocationService _StorageLocationService;
+        private readonly IStorageLocationService _storageLocationService;
         public StorageLocationController(IStorageLocationService StorageLocationService)
         {
-            _StorageLocationService = StorageLocationService;
+            _storageLocationService = StorageLocationService;
         }
 
         [HttpGet]
         public IActionResult Get(string query)
         {
-            var StorageLocationHouse = _StorageLocationService.GetAll(query);
+            var StorageLocationHouse = _storageLocationService.GetAll(query);
             return Ok(StorageLocationHouse);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var StorageLocation = _StorageLocationService.GetById(id);
+            var StorageLocation = _storageLocationService.GetById(id);
             if(StorageLocation == null)
                 return NotFound();
 
@@ -34,15 +34,32 @@ namespace DepositoDepositaMais.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] NewStorageLocationInputModel inputModel)
         {
-            var id = _StorageLocationService.CreateNewStorageLocation(inputModel);
+            var id = _storageLocationService.CreateNewStorageLocation(inputModel);
             return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
         }
 
-        [HttpPut("{id}/activate")]
-        public IActionResult Put(int id, [FromBody] UpdateStorageLocationViewModel inputModel)
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] UpdateStorageLocationInputModel inputModel)
         {
-            _StorageLocationService.UpdateStorageLocation(inputModel);
-            return BadRequest();
+            if (inputModel.Street.Length > 200)
+                return BadRequest();
+
+            _storageLocationService.UpdateStorageLocation(inputModel);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/inactivate")]
+        public IActionResult Delete(int id)
+        {
+            _storageLocationService.DeleteStorageLocation(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}/activate")]
+        public IActionResult Activate(int id)
+        {
+            _storageLocationService.ActivateStorageLocation(id);
+            return NoContent();
         }
     }
 }

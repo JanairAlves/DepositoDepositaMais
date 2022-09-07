@@ -27,16 +27,16 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 inputModel.MaximumQuantity,
                 inputModel.Street
                 );
-            _dbContext.StorageLocation.Add(storageLocation);
+            _dbContext.StorageLocations.Add(storageLocation);
 
             _dbContext.SaveChanges();
 
             return storageLocation.Id;
         }
 
-        public void UpdateStorageLocation(UpdateStorageLocationViewModel inputModel)
+        public void UpdateStorageLocation(UpdateStorageLocationInputModel inputModel)
         {
-            var storageLocation = _dbContext.StorageLocation.FirstOrDefault(s => s.Id == inputModel.Id);
+            var storageLocation = _dbContext.StorageLocations.FirstOrDefault(s => s.Id == inputModel.Id);
             storageLocation.Update(
                 inputModel.Quantity,
                 inputModel.MinimumQuantity,
@@ -49,7 +49,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public List<StorageLocationViewModel> GetAll(string query)
         {
-            var storageLocation = _dbContext.StorageLocation;
+            var storageLocation = _dbContext.StorageLocations;
             var storageLocationViewModel = storageLocation
                 .Select(s => new StorageLocationViewModel(
                     s.Id,
@@ -63,7 +63,7 @@ namespace DepositoDepositaMais.Application.Services.Implementations
 
         public StorageLocationDetailsViewModel GetById(int id)
         {
-            var storageLocation = _dbContext.StorageLocation.SingleOrDefault(s => s.Id == id);
+            var storageLocation = _dbContext.StorageLocations.SingleOrDefault(s => s.Id == id);
             var storageLocationViewModel = new StorageLocationDetailsViewModel(
                 storageLocation.Id,
                 storageLocation.ProductId,
@@ -73,6 +73,22 @@ namespace DepositoDepositaMais.Application.Services.Implementations
                 storageLocation.Street);
 
             return storageLocationViewModel;
+        }
+
+        public void ActivateStorageLocation(int id)
+        {
+            var storageLocation = _dbContext.StorageLocations.SingleOrDefault(sl => sl.Id == id);
+            storageLocation.Activate();
+
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteStorageLocation(int id)
+        {
+            var storageLocation = _dbContext.StorageLocations.SingleOrDefault(sl => sl.Id == id);
+            storageLocation.Inactivate();
+
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -51,7 +51,7 @@ namespace DepositoDepositaMais.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/inactivate")]
         public IActionResult Delete(int id)
         {
             _categoryService.DeleteCategory(id);

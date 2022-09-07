@@ -10,6 +10,9 @@ namespace DepositoDepositaMais.Application.Services.Interfaces
         List<StorageLocationViewModel> GetAll(string query);
         StorageLocationDetailsViewModel GetById(int id);
         int CreateNewStorageLocation(NewStorageLocationInputModel inputModel);
-        void UpdateStorageLocation(UpdateStorageLocationViewModel inputModel);
+        void UpdateStorageLocation(UpdateStorageLocationInputModel inputModel);
+        void ActivateStorageLocation(int id);
+        void DeleteStorageLocation(int id);
+        
     }
 }

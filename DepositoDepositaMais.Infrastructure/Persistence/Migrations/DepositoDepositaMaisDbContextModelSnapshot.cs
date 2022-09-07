@@ -508,6 +508,9 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
@@ -515,7 +518,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("DepositId");
 
-                    b.ToTable("StorageLocation");
+                    b.ToTable("StorageLocations");
                 });
 
             modelBuilder.Entity("DepositoDepositaMais.Core.Entities.User", b =>

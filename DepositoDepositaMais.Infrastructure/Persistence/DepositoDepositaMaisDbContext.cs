@@ -15,7 +15,7 @@ namespace DepositoDepositaMais.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
-        public DbSet<StorageLocation> StorageLocation { get; set; }
+        public DbSet<StorageLocation> StorageLocations { get; set; }
         public DbSet<Deposit> Deposits { get; set; }
         public DbSet<IncomingInvoice> IncomingInvoices { get; set; }
         public DbSet<IncomingOrder> IncomingOrders { get; set; }

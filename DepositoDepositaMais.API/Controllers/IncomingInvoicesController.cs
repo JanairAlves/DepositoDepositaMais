@@ -1,31 +1,40 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateCategory;
+using DepositoDepositaMais.Application.Commands.CreateIncomingInvoice;
+using DepositoDepositaMais.Application.Commands.DeleteIncomingInvoice;
+using DepositoDepositaMais.Application.Commands.UpdateIncomingInvoice;
+using DepositoDepositaMais.Application.Queries.GetAllIncomingInvoices;
+using DepositoDepositaMais.Application.Queries.GetIncomingInvoiceById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/incominginvoices")]
     public class IncomingInvoicesController : ControllerBase
     {
-        private readonly IIncomingInvoiceService _incomingInvoiceService;
-
-        public IncomingInvoicesController(IIncomingInvoiceService incomingInvoiceService)
+        private readonly IMediator _mediator;
+        public IncomingInvoicesController(IMediator mediator)
         {
-            _incomingInvoiceService = incomingInvoiceService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var incomingInvoices = _incomingInvoiceService.GetAll(query);
+            var getAllIncomingInvoicesQuery = new GetAllIncomingInvoicesQuery(query);
+
+            var incomingInvoices = await _mediator.Send(getAllIncomingInvoicesQuery);
+
             return Ok(incomingInvoices);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var incomingInvoice = _incomingInvoiceService.GetById(id);
+            var getIncomingInvoiceByIdQuery = new GetIncomingInvoiceByIdQuery(id);
+
+            var incomingInvoice = await _mediator.Send(getIncomingInvoiceByIdQuery);
             
             if(incomingInvoice == null) 
                 return NotFound();
@@ -34,36 +43,43 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewIncomingInvoiceInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateIncomingInvoiceCommand command)
         {
-            if (inputModel.CarrierName.Length > 50 && inputModel.CompanyName.Length > 50)
+            if (command.CarrierName.Length > 50 && command.CompanyName.Length > 50)
                 return BadRequest();
 
-            var id = _incomingInvoiceService.CreateNewIncomingInvoice(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateIncomingInvoiceInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateIncomingInvoiceCommand command)
         {
-            if(inputModel.Description.Length > 200)
+            if(command.Description.Length > 200)
                 return BadRequest();
 
-            _incomingInvoiceService.UpdateIncomingInvoice(inputModel);
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _incomingInvoiceService.DeleteIncomingInvoice(id);
+            var command = new DeleteIncomingInvoiceCommand(id);
+
+            await _mediator.Send(command);
+            
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _incomingInvoiceService.ActivateIncomingInvoice(id);
+            var command = new ActivateCategoryCommand(id);
+            
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }

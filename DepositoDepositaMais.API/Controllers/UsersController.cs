@@ -1,31 +1,40 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateUser;
+using DepositoDepositaMais.Application.Commands.CreateUser;
+using DepositoDepositaMais.Application.Commands.DeleteUser;
+using DepositoDepositaMais.Application.Commands.UpdateUser;
+using DepositoDepositaMais.Application.Queries.GetAllUsers;
+using DepositoDepositaMais.Application.Queries.GetUserById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UsersController(IUserService userService)
+        private readonly IMediator _mediator;
+        public UsersController(IMediator mediator)
         {
-            _userService = userService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var users = _userService.GetAll(query);
+            var getAllUsersQuery = new GetAllUsersQuery(query);
+
+            var users = await _mediator.Send(getAllUsersQuery);
+            
             return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var user = _userService.GetById(id);
+            var getUserByIdQuery = new GetUserByIdQuery(id);
+
+            var user = await _mediator.Send(getUserByIdQuery);
 
             if(user == null)
                 return NotFound();
@@ -34,36 +43,43 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewUserInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
-            if(inputModel.FullName.Length > 50)
+            if(command.FullName.Length > 50)
                 return BadRequest();
 
-            var id = _userService.CreateNewUser(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}/login")]
-        public IActionResult Update(int id, [FromBody] UpdateUserInputModel inputModel)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateUserCommand command)
         {
-            if (inputModel.FullName.Length > 50)
+            if (command.FullName.Length > 50)
                 return BadRequest();
 
-            _userService.UpdateUser(inputModel);
+            await _mediator.Send(command);
+            
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _userService.DeleteUser(id);
+            var command = new DeleteUserCommand(id);
+            
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _userService.ActivateUser(id);
+            var command = new ActivateUserCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }

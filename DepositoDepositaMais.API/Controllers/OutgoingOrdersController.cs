@@ -1,31 +1,41 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateOutgoingInvoice;
+using DepositoDepositaMais.Application.Commands.CreateOutgoingOrder;
+using DepositoDepositaMais.Application.Commands.DeleteOutgoingOrder;
+using DepositoDepositaMais.Application.Commands.UpdateOutgoingOrder;
+using DepositoDepositaMais.Application.Queries.GetAllOutgoingOrders;
+using DepositoDepositaMais.Application.Queries.GetOutgoingOrderById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/outgoingorders")]
     public class OutgoingOrdersController : ControllerBase
     {
-        private readonly IOutgoingOrderService _outgoingOrderService;
+        private readonly IMediator _mediator;
 
-        public OutgoingOrdersController(IOutgoingOrderService outgoingOrderService)
+        public OutgoingOrdersController(IMediator mediator)
         {
-            _outgoingOrderService = outgoingOrderService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var outgoingOrders = _outgoingOrderService.GetAll(query);
+            var getAllOutgoingOrdesQuery = new GetAllOutgoingOrdersQuery(query);
+
+            var outgoingOrders = await _mediator.Send(getAllOutgoingOrdesQuery);
+
             return Ok(outgoingOrders);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var outgoingOrder = _outgoingOrderService.GetById(id);
+            var getOutgoingOrderByIdQuery = new GetOutgoingOrderByIdQuery(id);
+
+            var outgoingOrder = await _mediator.Send(getOutgoingOrderByIdQuery);
 
             if(outgoingOrder == null)
                 return NotFound();
@@ -34,36 +44,43 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewOutgoingOrderInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateOutgoingOrderCommand command)
         {
-            if (inputModel.Description.Length > 200)
+            if (command.Description.Length > 200)
                 return BadRequest();
 
-            var id = _outgoingOrderService.CreateNewOutgoingOrder(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateOutgoingOrderInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateOutgoingOrderCommand command)
         {
-            if (inputModel.Description.Length > 200)
+            if (command.Description.Length > 200)
                 return BadRequest();
 
-            _outgoingOrderService.UpdateOutgoingOrder(inputModel);
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _outgoingOrderService.DeleteOutgoingOrder(id);
+            var command = new DeleteOutgoingOrderCommand(id);
+            
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _outgoingOrderService.ActivateOutgoingOrder(id);
+            var command = new ActivateOutgoingInvoiceCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }

@@ -1,0 +1,15 @@
+﻿using MediatR;
+
+namespace DepositoDepositaMais.Application.Commands.UpdateProduct
+{
+    public class UpdateProductCommand : IRequest<Unit>
+    {
+        public int Id { get; }
+        public string ProductCode { get; private set; }
+        public int ProviderId { get; private set; }
+        public string ProductName { get; private set; }
+        public string Description { get; private set; }
+        public string PackagingType { get; private set; }
+        public string QuantityPackaging { get; private set; }
+    }
+}

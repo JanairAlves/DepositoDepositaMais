@@ -1,30 +1,40 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateStorageLocation;
+using DepositoDepositaMais.Application.Commands.CreateStorageLocation;
+using DepositoDepositaMais.Application.Commands.DeleteStorageLocation;
+using DepositoDepositaMais.Application.Commands.UpdateStorageLocation;
+using DepositoDepositaMais.Application.Queries.GetAllStorageLocations;
+using DepositoDepositaMais.Application.Queries.GetStorageLocationById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/StorageLocations")]
     public class StorageLocationController : ControllerBase
     {
-        private readonly IStorageLocationService _storageLocationService;
-        public StorageLocationController(IStorageLocationService StorageLocationService)
+        private readonly IMediator _mediator;
+        public StorageLocationController(IMediator mediator)
         {
-            _storageLocationService = StorageLocationService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var StorageLocationHouse = _storageLocationService.GetAll(query);
-            return Ok(StorageLocationHouse);
+            var getAllStorageLocationsQuery = new GetAllStorageLocationsQuery(query);
+
+            var storageLocations = await _mediator.Send(getAllStorageLocationsQuery);
+
+            return Ok(storageLocations);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var StorageLocation = _storageLocationService.GetById(id);
+            var getStorageLocationByIdQuery = new GetStorageLocationByIdQuery(id);
+
+            var StorageLocation = await _mediator.Send(getStorageLocationByIdQuery);
             if(StorageLocation == null)
                 return NotFound();
 
@@ -32,33 +42,40 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewStorageLocationInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateStorageLocationCommand command)
         {
-            var id = _storageLocationService.CreateNewStorageLocation(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateStorageLocationInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateStorageLocationCommand command)
         {
-            if (inputModel.Street.Length > 200)
+            if (command.Street.Length > 200)
                 return BadRequest();
 
-            _storageLocationService.UpdateStorageLocation(inputModel);
+            await _mediator.Send(command);
+            
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _storageLocationService.DeleteStorageLocation(id);
+            var command = new DeleteStorageLocationCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _storageLocationService.ActivateStorageLocation(id);
+            var command = new ActivateStorageLocationCommand(id);
+
+            await _mediator.Send(command);
+            
             return NoContent();
         }
     }

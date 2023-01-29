@@ -1,31 +1,40 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateDeposit;
+using DepositoDepositaMais.Application.Commands.CreateDeposit;
+using DepositoDepositaMais.Application.Commands.DeleteDeposit;
+using DepositoDepositaMais.Application.Commands.UpdateDeposit;
+using DepositoDepositaMais.Application.Queries.GetAllDeposits;
+using DepositoDepositaMais.Application.Queries.GetDepositById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/deposits")]
     public class DepositsController : ControllerBase
     {
-        private readonly IDepositService _depositService;
-
-        public DepositsController(IDepositService depositService)
+        private readonly IMediator _mediator;
+        public DepositsController(IMediator mediator)
         {
-            _depositService = depositService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var deposits = _depositService.GetAll(query);
+            var getAllDepositsQuery = new GetAllDepositsQuery(query);
+
+            var deposits = await _mediator.Send(getAllDepositsQuery);
+
             return Ok(deposits);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var deposit = _depositService.GetById(id);
+            var getDepositByIdQuery = new GetDepositByIdQuery(id);
+
+            var deposit = await _mediator.Send(getDepositByIdQuery);
             
             if(deposit == null) 
                 return NotFound();
@@ -34,36 +43,43 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewDepositInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateDepositCommand command)
         {
-            if (inputModel.DepositName.Length > 50)
+            if (command.DepositName.Length > 50)
                 return BadRequest();
 
-            var id = _depositService.CreateNewDeposit(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateDepositInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateDepositCommand command)
         {
-            if(inputModel.Description.Length > 200)
+            if(command.Description.Length > 200)
                 return BadRequest();
 
-            _depositService.UpdateDeposit(inputModel);
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _depositService.DeleteDeposit(id);
+            var command = new DeleteDepositCommand(id);
+            
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _depositService.ActivateDeposit(id);
+            var command = new ActivateDepositCommand(id);
+
+            await _mediator.Send(command);
+            
             return NoContent();
         }
     }

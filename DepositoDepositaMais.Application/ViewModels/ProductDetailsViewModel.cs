@@ -1,5 +1,4 @@
-﻿
-using DepositoDepositaMais.Core.Enums;
+﻿using DepositoDepositaMais.Core.Enums;
 using System;
 
 namespace DepositoDepositaMais.Application.ViewModels
@@ -19,7 +18,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 
             StorageLocationId = storageLocationId;
             Street = street;
-            
+
             CategoryName = categoryName;
         }
 

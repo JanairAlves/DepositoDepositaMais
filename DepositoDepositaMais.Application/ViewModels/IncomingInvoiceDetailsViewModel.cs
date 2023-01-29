@@ -5,9 +5,9 @@ namespace DepositoDepositaMais.Application.ViewModels
 {
     public class IncomingInvoiceDetailsViewModel
     {
-        public IncomingInvoiceDetailsViewModel(int id, string companyName, string companyAddress, string cNPJCompany, 
-            string cPFCompany, string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility, 
-            string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration, 
+        public IncomingInvoiceDetailsViewModel(int id, string companyName, string companyAddress, string cNPJCompany,
+            string cPFCompany, string companyStateRegistration, string carrierName, CodeResponsibilityEnum codeResponsibility,
+            string carPlate, string cNPJCarrier, string cPFCarrier, string carrierAdress, string carrierStateRegistration,
             TypeOfVolumeEnum typeOfVolume, int weightOfTheCargo)
         {
             Id = id;

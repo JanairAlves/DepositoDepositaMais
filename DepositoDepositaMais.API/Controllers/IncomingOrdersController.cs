@@ -1,69 +1,85 @@
-﻿using DepositoDepositaMais.API.Models;
-using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateIncomingOrder;
+using DepositoDepositaMais.Application.Commands.CreateIncomingOrder;
+using DepositoDepositaMais.Application.Commands.DeleteIncomingInvoice;
+using DepositoDepositaMais.Application.Commands.UpdateIncomingOrder;
+using DepositoDepositaMais.Application.Queries.GetAllIncomingOrders;
+using DepositoDepositaMais.Application.Queries.GetIncomingOrderById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/incomingorders")]
     public class IncomingOrdersController : ControllerBase
     {
-        private readonly IIncomingOrderService _incomingOrderService;
-
-        public IncomingOrdersController(IIncomingOrderService incomingOrderService)
+        private readonly IMediator _mediator;
+        public IncomingOrdersController(IMediator mediator)
         {
-            _incomingOrderService = incomingOrderService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var incomingOrders = _incomingOrderService.GetAll(query);
+            var getAllIncomingOrdersQuery = new GetAllIncomingOrdersQuery(query);
+
+            var incomingOrders = await _mediator.Send(getAllIncomingOrdersQuery);
+
             return Ok(incomingOrders);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var incomingOrder = _incomingOrderService.GetById(id);
+            var getIncomingOrderByIdQuery = new GetIncomingOrderByIdQuery(id);
+            
+            var incomingOrder = await _mediator.Send(getIncomingOrderByIdQuery);
 
-            if(incomingOrder == null)
+            if (incomingOrder == null)
                 return NotFound();
 
             return Ok(incomingOrder);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewIncomingOrderInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateIncomingOrderCommand command)
         {
-            if (inputModel.Description.Length > 50)
+            if (command.Description.Length > 50)
                 return BadRequest();
 
-            var id = _incomingOrderService.CreateNewIncomingOrder(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateIncomingOrderInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateIncomingOrderCommand command)
         {
-            if (inputModel.Description.Length > 20)
+            if (command.Description.Length > 20)
                 return BadRequest();
 
-            _incomingOrderService.UpdateIncomingOrder(inputModel);
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _incomingOrderService.DeleteIncomingOrder(id);
+            var command = new DeleteIncomingInvoiceCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public  async Task<IActionResult> Activate(int id)
         {
-            _incomingOrderService.ActivateIncomingOrder(id);
+            var command = new ActivateIncomingOrderCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }

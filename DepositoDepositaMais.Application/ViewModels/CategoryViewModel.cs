@@ -1,5 +1,4 @@
-﻿
-namespace DepositoDepositaMais.Application.ViewModels
+﻿namespace DepositoDepositaMais.Application.ViewModels
 {
     public class CategoryViewModel
     {

@@ -1,29 +1,40 @@
-﻿using DepositoDepositaMais.Application.InputModels;
-using DepositoDepositaMais.Application.Services.Interfaces;
+﻿using DepositoDepositaMais.Application.Commands.ActivateCategory;
+using DepositoDepositaMais.Application.Commands.CreateCategory;
+using DepositoDepositaMais.Application.Commands.DeleteCategory;
+using DepositoDepositaMais.Application.Commands.UpdateCategory;
+using DepositoDepositaMais.Application.Queries.GetAllCategories;
+using DepositoDepositaMais.Application.Queries.GetCategoryById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.API.Controllers
 {
     [Route("api/categories")]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
-        public CategoriesController(ICategoryService categoryService)
+        private readonly IMediator _mediator;
+        public CategoriesController(IMediator mediator)
         {
-            _categoryService = categoryService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var categories = _categoryService.GetAll(query);
+            var getAllCategoriesQuery = new GetAllCategoriesQuery(query);
+
+            var categories = await _mediator.Send(getAllCategoriesQuery);
+
             return Ok(categories);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var category = _categoryService.GetById(id);
+            var getCategoryByIdQuery = new GetCategoryByIdQuery(id);
+            
+            var category = await _mediator.Send(getCategoryByIdQuery);            
 
             if(category == null)
                 return NotFound();
@@ -32,36 +43,43 @@ namespace DepositoDepositaMais.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] NewCategoryInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateCategoryCommand command)
         {
-            if(inputModel.CategoryName.Length > 50)
+            if(command.CategoryName.Length > 50)
                 return BadRequest();
 
-            var id = _categoryService.CreateNewCategory(inputModel);
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateCategoryInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateCategoryCommand command)
         {
-            if(inputModel.Description.Length > 200)
+            if(command.Description.Length > 200)
                 return BadRequest();
 
-            _categoryService.UpdateCategory(inputModel);
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}/inactivate")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _categoryService.DeleteCategory(id);
+            var command = new DeleteCategoryCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpPut("{id}/activate")]
-        public IActionResult Activate(int id)
+        public async Task<IActionResult> Activate(int id)
         {
-            _categoryService.ActivateCategory(id);
+            var command = new ActivateCategoryCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }

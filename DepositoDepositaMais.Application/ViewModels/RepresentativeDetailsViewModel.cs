@@ -20,7 +20,7 @@ namespace DepositoDepositaMais.Application.ViewModels
 
             ProviderName = providerName;
             CNPJ = cnpj;
-    }
+        }
 
         public int Id { get; private set; }
         public int ProviderId { get; private set; }

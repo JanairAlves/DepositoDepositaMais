@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,17 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetStorageLocationById
 {
     public class GetStorageLocationByIdQueryHandler : IRequestHandler<GetStorageLocationByIdQuery, StorageLocationDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetStorageLocationByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public GetStorageLocationByIdQueryHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<StorageLocationDetailsViewModel> Handle(GetStorageLocationByIdQuery request, CancellationToken cancellationToken)
         {
-            var storageLocation = await _dbContext.StorageLocations
-                .Include(sl => sl.Deposit)
-                .SingleOrDefaultAsync(s => s.Id == request.Id);
+            var storageLocation = await _storageLocationRepository.GetStorageLocationByIdAsync(request.Id);
 
             var storageLocationViewModel = new StorageLocationDetailsViewModel(
                 storageLocation.Id,

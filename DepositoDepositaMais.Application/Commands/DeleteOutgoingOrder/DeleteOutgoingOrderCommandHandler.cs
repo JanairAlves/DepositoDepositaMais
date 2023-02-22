@@ -1,6 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteOutgoingOrder
 {
     public class DeleteOutgoingOrderCommandHandler : IRequestHandler<DeleteOutgoingOrderCommand>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteOutgoingOrderCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingOrderRepository _outgoingOrderRepository;
+        public DeleteOutgoingOrderCommandHandler(IOutgoingOrderRepository outgoingOrderRepository)
         {
-            _dbContext = dbContext;
+            _outgoingOrderRepository = outgoingOrderRepository;
         }
 
         public async Task<Unit> Handle(DeleteOutgoingOrderCommand request, CancellationToken cancellationToken)
         {
-            var outgoingOrder = _dbContext.OutgoingOrders.SingleOrDefault(oo => oo.Id == request.Id);
+            var outgoingOrder = await _outgoingOrderRepository.GetOutgoingOrderByIdAsync(request.Id);
 
             outgoingOrder.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _outgoingOrderRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

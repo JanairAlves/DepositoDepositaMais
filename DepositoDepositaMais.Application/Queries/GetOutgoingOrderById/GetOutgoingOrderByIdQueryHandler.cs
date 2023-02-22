@@ -1,8 +1,6 @@
-﻿using DepositoDepositaMais.Application.Queries.GetIncomingOrderById;
-using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Application.ViewModels;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,18 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetOutgoingOrderById
 {
     public class GetOutgoingOrderByIdQueryHandler : IRequestHandler<GetOutgoingOrderByIdQuery, OutgoingOrderDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetOutgoingOrderByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingOrderRepository _outgoingOrderRepository;
+        public GetOutgoingOrderByIdQueryHandler(IOutgoingOrderRepository outgoingOrderRepository)
         {
-            _dbContext = dbContext;
+            _outgoingOrderRepository = outgoingOrderRepository;
         }
 
         public async Task<OutgoingOrderDetailsViewModel> Handle(GetOutgoingOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var outgoingOrder = await _dbContext.OutgoingOrders
-                .Include(oo => oo.Deposit)
-                .Include(oo => oo.Representative)
-                .SingleOrDefaultAsync(oo => oo.Id == request.Id);
+            var outgoingOrder = await _outgoingOrderRepository.GetOutgoingOrderByIdAsync(request.Id);
 
             var outgoingOrderDetailsViewModel = new OutgoingOrderDetailsViewModel(
                 outgoingOrder.Id,

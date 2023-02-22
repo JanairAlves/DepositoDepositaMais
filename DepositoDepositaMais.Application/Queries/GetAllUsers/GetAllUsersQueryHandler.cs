@@ -1,11 +1,8 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,25 +10,25 @@ namespace DepositoDepositaMais.Application.Queries.GetAllUsers
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllUsersQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IUserRepository _userRepository;
+        public GetAllUsersQueryHandler(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task<List<UserViewModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var user = _dbContext.Users;
+            var users = await _userRepository.GetAllUsersAsync();
 
-            var userViewModel = await user
+            var usersViewModel = users
                 .Select(u => new UserViewModel(
                     u.FullName,
                     u.Email,
                     u.BirthDate,
                     u.Status)
-                ).ToListAsync();
+                ).ToList();
 
-            return userViewModel;
+            return usersViewModel;
         }
     }
 }

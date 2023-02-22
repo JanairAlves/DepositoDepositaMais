@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateUserCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IUserRepository _userRepository;
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -24,8 +22,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateUser
                 request.BirthDate
                 );
 
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            await _userRepository.CreateUser(user);
 
             return user.Id;
         }

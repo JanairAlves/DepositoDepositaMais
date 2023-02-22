@@ -1,11 +1,5 @@
-﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.ActivateDeposit
 {
     public class ActivateDepositCommandHandler : IRequestHandler<ActivateDepositCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public ActivateDepositCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public ActivateDepositCommandHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<Unit> Handle(ActivateDepositCommand request, CancellationToken cancellationToken)
         {
-            var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == request.Id);
+            var deposit = await _depositRepository.GetDepositByIdAsync(request.Id);
             
             deposit.Activate();
 
-            await _dbContext.SaveChangesAsync();
+            await _depositRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

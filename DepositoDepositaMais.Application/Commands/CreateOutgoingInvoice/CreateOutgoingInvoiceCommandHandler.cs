@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateOutgoingInvoice
 {
     public class CreateOutgoingInvoiceCommandHandler : IRequestHandler<CreateOutgoingInvoiceCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateOutgoingInvoiceCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingInvoiceRepository _OutgoingInvoiceRepository;
+        public CreateOutgoingInvoiceCommandHandler(IOutgoingInvoiceRepository OutgoingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _OutgoingInvoiceRepository = OutgoingInvoiceRepository;
         }
 
         public async Task<int> Handle(CreateOutgoingInvoiceCommand request, CancellationToken cancellationToken)
@@ -28,8 +26,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateOutgoingInvoice
                 request.SubmittedIn
                 );
 
-            await _dbContext.OutgoingInvoices.AddAsync(outgoingInvoice);
-            await _dbContext.SaveChangesAsync();
+            await _OutgoingInvoiceRepository.CreateOutgoingInvoice(outgoingInvoice);
 
             return outgoingInvoice.Id;
         }

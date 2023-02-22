@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateRepresentative
 {
     public class CreateRepresentativeCommandHandler : IRequestHandler<CreateRepresentativeCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateRepresentativeCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IRepresentativeRepository _representativeRepository;
+        public CreateRepresentativeCommandHandler(IRepresentativeRepository representativeRepository)
         {
-            _dbContext = dbContext;
+            _representativeRepository = representativeRepository;
         }
 
         public async Task<int> Handle(CreateRepresentativeCommand request, CancellationToken cancellationToken)
@@ -28,8 +26,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateRepresentative
                 request.Description
                 );
 
-            await _dbContext.Representatives.AddAsync(representative);
-            await _dbContext.SaveChangesAsync();
+            await _representativeRepository.CreateRepresentative(representative);
 
             return representative.Id;
         }

@@ -4,15 +4,13 @@ using DepositoDepositaMais.Application.Commands.CreateIncomingInvoice;
 using DepositoDepositaMais.Application.Commands.CreateIncomingOrder;
 using DepositoDepositaMais.Application.Commands.CreateOutgoingInvoice;
 using DepositoDepositaMais.Application.Commands.CreateOutgoingOrder;
-using DepositoDepositaMais.Application.Commands.CreateProduct;
 using DepositoDepositaMais.Application.Commands.CreateProvider;
 using DepositoDepositaMais.Application.Commands.CreateRepresentative;
 using DepositoDepositaMais.Application.Commands.CreateStorageLocation;
 using DepositoDepositaMais.Application.Commands.CreateUser;
-using DepositoDepositaMais.Application.Queries.GetIncomingOrderById;
-using DepositoDepositaMais.Application.Services.Implementations;
-using DepositoDepositaMais.Application.Services.Interfaces;
+using DepositoDepositaMais.Core.Repositories;
 using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Infrastructure.Persistence.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +36,19 @@ namespace DepositoDepositaMais.API
         {
             var connectionString = Configuration.GetConnectionString("DepositoDepositaMaisCs");
             services.AddDbContext<DepositoDepositaMaisDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IDepositRepository, DepositRepository>();
+            services.AddScoped<IIncomingInvoiceRepository, IncomingInvoiceRepository>();
+            services.AddScoped<IIncomingOrderRepository, IncomingOrderRepository>();
+            services.AddScoped<IOutgoingInvoiceRepository, OutgoingInvoiceRepository>();
+            services.AddScoped<IOutgoingOrderRepository, OutgoingOrderRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProviderRepository, ProviderRepository>();
+            services.AddScoped<IRepresentativeRepository, RepresentativeRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<IStorageLocationRepository, StorageLocationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddControllers();
             services.AddMediatR(typeof(CreateCategoryCommand));

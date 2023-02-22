@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateStorageLocation
 {
     public class CreateStorageLocationCommandHandler : IRequestHandler<CreateStorageLocationCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateStorageLocationCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public CreateStorageLocationCommandHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<int> Handle(CreateStorageLocationCommand request, CancellationToken cancellationToken)
@@ -25,8 +24,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateStorageLocation
                 request.Street
                 );
 
-            await _dbContext.StorageLocations.AddAsync(storageLocation);
-            await _dbContext.SaveChangesAsync();
+            await _storageLocationRepository.CreateStorageLocation(storageLocation);
 
             return storageLocation.Id;
         }

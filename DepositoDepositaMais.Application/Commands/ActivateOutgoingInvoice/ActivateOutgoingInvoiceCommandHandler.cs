@@ -1,6 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.ActivateOutgoingInvoice
 {
     public class ActivateOutgoingInvoiceCommandHandler : IRequestHandler<ActivateOutgoingInvoiceCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public ActivateOutgoingInvoiceCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingInvoiceRepository _outgoingInvoiceRepository;
+        public ActivateOutgoingInvoiceCommandHandler(IOutgoingInvoiceRepository outgoingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _outgoingInvoiceRepository = outgoingInvoiceRepository;
         }
 
         public async Task<Unit> Handle(ActivateOutgoingInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == request.Id);
+            var outgoingInvoice = await _outgoingInvoiceRepository.GetOutgoingInvoiceByIdAsync(request.Id);
 
             outgoingInvoice.Activate();
 
-            await _dbContext.SaveChangesAsync();
+            await _outgoingInvoiceRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

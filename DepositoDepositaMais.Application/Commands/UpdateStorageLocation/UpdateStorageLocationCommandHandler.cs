@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,15 +7,15 @@ namespace DepositoDepositaMais.Application.Commands.UpdateStorageLocation
 {
     public class UpdateStorageLocationCommandHandler : IRequestHandler<UpdateStorageLocationCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateStorageLocationCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public UpdateStorageLocationCommandHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<Unit> Handle(UpdateStorageLocationCommand request, CancellationToken cancellationToken)
         {
-            var storageLocation = _dbContext.StorageLocations.FirstOrDefault(s => s.Id == request.Id);
+            var storageLocation = await _storageLocationRepository.GetStorageLocationByIdAsync(request.Id);
 
             storageLocation.Update(
                 request.Quantity,
@@ -28,7 +24,7 @@ namespace DepositoDepositaMais.Application.Commands.UpdateStorageLocation
                 request.Street
                 );
 
-            await _dbContext.SaveChangesAsync();
+            await _storageLocationRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

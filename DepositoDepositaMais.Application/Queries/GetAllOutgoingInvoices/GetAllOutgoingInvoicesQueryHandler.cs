@@ -1,11 +1,8 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,27 +10,27 @@ namespace DepositoDepositaMais.Application.Queries.GetAllOutgoingInvoices
 {
     public class GetAllOutgoingInvoicesQueryHandler : IRequestHandler<GetAllOutgoingInvoicesQuery, List<OutgoingInvoiceViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllOutgoingInvoicesQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingInvoiceRepository _outgoingInvoiceRepository;
+        public GetAllOutgoingInvoicesQueryHandler(IOutgoingInvoiceRepository outgoingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _outgoingInvoiceRepository = outgoingInvoiceRepository;
         }
 
         public async Task<List<OutgoingInvoiceViewModel>> Handle(GetAllOutgoingInvoicesQuery request, CancellationToken cancellationToken)
         {
-            var outgoingInvoice = _dbContext.OutgoingInvoices;
+            var outgoingInvoices = await _outgoingInvoiceRepository.GetAllOutgoingInvoicesAsync();
 
-            var outgoingInvoiceViewModel = await outgoingInvoice
+            var outgoingInvoicesViewModel = outgoingInvoices
                 .Select(oi => new OutgoingInvoiceViewModel(
                     oi.Id,
-                oi.DepositId,
-                oi.StorageLocationId,
-                oi.ProductId,
-                oi.Quantity,
-                oi.Value)
-                ).ToListAsync();
+                    oi.DepositId,
+                    oi.StorageLocationId,
+                    oi.ProductId,
+                    oi.Quantity,
+                    oi.Value)
+                ).ToList();
 
-            return outgoingInvoiceViewModel;
+            return outgoingInvoicesViewModel;
         }
     }
 }

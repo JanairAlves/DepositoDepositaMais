@@ -1,5 +1,5 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateCategory
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateCategoryCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly ICategoryRepository _categoryRepository;
+        public CreateCategoryCommandHandler(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
@@ -21,8 +21,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateCategory
                 request.Description
                 );
 
-            await _dbContext.Categories.AddAsync(category);
-            await _dbContext.SaveChangesAsync();
+            await _categoryRepository.CreateCategoryAsync(category);
 
             return category.Id;
         }

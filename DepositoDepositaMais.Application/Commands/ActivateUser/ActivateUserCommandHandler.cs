@@ -1,10 +1,5 @@
-﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.ActivateUser
 {
     public class ActivateUserCommandHandler : IRequestHandler<ActivateUserCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public ActivateUserCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IUserRepository _userRepository;
+        public ActivateUserCommandHandler(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task<Unit> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _dbContext.Users.SingleOrDefault(u => u.Id == request.Id);
+            var user = await _userRepository.GetUserByIdAsync(request.Id);
 
             user.Activate();
 
-            await _dbContext.SaveChangesAsync();
+            await _userRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

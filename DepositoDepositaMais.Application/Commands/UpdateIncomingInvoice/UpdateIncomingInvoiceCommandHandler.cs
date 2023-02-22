@@ -1,7 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,15 +7,15 @@ namespace DepositoDepositaMais.Application.Commands.UpdateIncomingInvoice
 {
     public class UpdateIncomingInvoiceCommandHandler : IRequestHandler<UpdateIncomingInvoiceCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateIncomingInvoiceCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingInvoiceRepository _incomingInvoiceRepository;
+        public UpdateIncomingInvoiceCommandHandler(IIncomingInvoiceRepository incomingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _incomingInvoiceRepository = incomingInvoiceRepository;
         }
 
         public async Task<Unit> Handle(UpdateIncomingInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var incomingInvoice = _dbContext.IncomingInvoices.SingleOrDefault(ii => ii.Id == request.Id);
+            var incomingInvoice = await _incomingInvoiceRepository.GetIncomingInvoiceByIdAsync(request.Id);
 
             incomingInvoice.Update(
                 request.CompanyName,
@@ -42,7 +40,7 @@ namespace DepositoDepositaMais.Application.Commands.UpdateIncomingInvoice
                 request.ReceivedIn
                 );
 
-            await _dbContext.SaveChangesAsync();
+            await _incomingInvoiceRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

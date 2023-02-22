@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteStorageLocation
 {
     public class DeleteStorageLocationCommandHandler : IRequestHandler<DeleteStorageLocationCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteStorageLocationCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public DeleteStorageLocationCommandHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<Unit> Handle(DeleteStorageLocationCommand request, CancellationToken cancellationToken)
         {
-            var storageLocation = _dbContext.StorageLocations.SingleOrDefault(sl => sl.Id == request.Id);
+            var storageLocation = await _storageLocationRepository.GetStorageLocationByIdAsync(request.Id);
 
             storageLocation.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _storageLocationRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

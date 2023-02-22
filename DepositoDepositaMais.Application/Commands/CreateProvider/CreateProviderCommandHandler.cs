@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateProvider
 {
     public class CreateProviderCommandHandler : IRequestHandler<CreateProviderCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateProviderCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProviderRepository _providerRepository;
+        public CreateProviderCommandHandler(IProviderRepository providerRepository)
         {
-            _dbContext = dbContext;
+            _providerRepository = providerRepository;
         }
 
         public async Task<int> Handle(CreateProviderCommand request, CancellationToken cancellationToken)
@@ -28,8 +26,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateProvider
                 request.ProviderType
                 );
 
-            await _dbContext.Providers.AddAsync(provider);
-            await _dbContext.SaveChangesAsync();
+            await _providerRepository.CreateProvider(provider);
 
             return provider.Id;
         }

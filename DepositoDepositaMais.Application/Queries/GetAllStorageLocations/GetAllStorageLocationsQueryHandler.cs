@@ -1,11 +1,8 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,25 +10,25 @@ namespace DepositoDepositaMais.Application.Queries.GetAllStorageLocations
 {
     public class GetAllStorageLocationsQueryHandler : IRequestHandler<GetAllStorageLocationsQuery, List<StorageLocationViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllStorageLocationsQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public GetAllStorageLocationsQueryHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<List<StorageLocationViewModel>> Handle(GetAllStorageLocationsQuery request, CancellationToken cancellationToken)
         {
-            var storageLocation = _dbContext.StorageLocations;
+            var storageLocations = await _storageLocationRepository.GetAllStorageLocationsAsync();
 
-            var storageLocationViewModel = await storageLocation
+            var storageLocationsViewModel = storageLocations
                 .Select(s => new StorageLocationViewModel(
                     s.Id,
                     s.ProductId,
                     s.Quantity,
                     s.Street)
-                ).ToListAsync();
+                ).ToList();
 
-            return storageLocationViewModel;
+            return storageLocationsViewModel;
         }
     }
 }

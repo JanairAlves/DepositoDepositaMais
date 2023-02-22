@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,15 +7,15 @@ namespace DepositoDepositaMais.Application.Commands.UpdateRepresentative
 {
     public class UpdateRepresentativeCommandHandler : IRequestHandler<UpdateRepresentativeCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateRepresentativeCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IRepresentativeRepository _representativeRepository;
+        public UpdateRepresentativeCommandHandler(IRepresentativeRepository representativeRepository)
         {
-            _dbContext = dbContext;
+            _representativeRepository = representativeRepository;
         }
 
         public async Task<Unit> Handle(UpdateRepresentativeCommand request, CancellationToken cancellationToken)
         {
-            var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == request.Id);
+            var representative = await _representativeRepository.GetRepresentativeByIdAsync(request.Id);
 
             representative.Update(
                 request.ProviderId,
@@ -31,7 +27,7 @@ namespace DepositoDepositaMais.Application.Commands.UpdateRepresentative
                 request.Description
                 );
 
-            await _dbContext.SaveChangesAsync();
+            await _representativeRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

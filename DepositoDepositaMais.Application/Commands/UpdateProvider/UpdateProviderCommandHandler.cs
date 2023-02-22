@@ -1,6 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,15 +7,15 @@ namespace DepositoDepositaMais.Application.Commands.UpdateProvider
 {
     public class UpdateProviderCommandHandler : IRequestHandler<UpdateProviderCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateProviderCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProviderRepository _providerRepository;
+        public UpdateProviderCommandHandler(IProviderRepository providerRepository)
         {
-            _dbContext = dbContext;
+            _providerRepository = providerRepository;
         }
 
         public async Task<Unit> Handle(UpdateProviderCommand request, CancellationToken cancellationToken)
         {
-            var provider = _dbContext.Providers.SingleOrDefault(p => p.Id == request.Id);
+            var provider = await _providerRepository.GetProviderByIdAsync(request.Id);
 
             provider.Update(
                 request.providerName,
@@ -28,7 +27,7 @@ namespace DepositoDepositaMais.Application.Commands.UpdateProvider
                 request.ProviderType
                 );
 
-            await _dbContext.SaveChangesAsync();
+            await _providerRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

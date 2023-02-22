@@ -1,6 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,18 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.ActivateCategory
 {
     public class ActivateCategoryCommandHandler : IRequestHandler<ActivateCategoryCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public ActivateCategoryCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly ICategoryRepository _categoryRepository;
+        public ActivateCategoryCommandHandler(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<Unit> Handle(ActivateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = _dbContext.Categories.SingleOrDefault(c => c.Id == request.Id);
+            var category = await _categoryRepository.GetCategoryByIdAsync(request.Id);
+
             category.Activate();
 
-            await _dbContext.SaveChangesAsync();
+            await _categoryRepository.SaveChangesAsync()/
 
             return Unit.Value;
         }

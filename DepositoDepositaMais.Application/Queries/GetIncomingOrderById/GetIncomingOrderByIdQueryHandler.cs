@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetIncomingOrderById
 {
     public class GetIncomingOrderByIdQueryHandler : IRequestHandler<GetIncomingOrderByIdQuery, IncomingOrderDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetIncomingOrderByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
+        public GetIncomingOrderByIdQueryHandler(IIncomingOrderRepository incomingOrderRepository)
         {
-            _dbContext = dbContext;
+            _incomingOrderRepository = incomingOrderRepository;
         }
         
         public async Task<IncomingOrderDetailsViewModel> Handle(GetIncomingOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var incomingOrder = await _dbContext.IncomingOrders
-                .Include(io => io.Deposit)
-                .Include(io => io.Representative)
-                .SingleOrDefaultAsync(io => io.Id == request.Id);
+            var incomingOrder = await _incomingOrderRepository.GetIncomingOrderByIdAsync(request.Id);
 
             var incomingOrderDetailsViewModel = new IncomingOrderDetailsViewModel(
                 incomingOrder.Id,

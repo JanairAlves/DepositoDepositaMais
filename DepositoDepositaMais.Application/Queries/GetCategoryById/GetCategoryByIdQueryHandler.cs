@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,15 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetCategoryById
 {
     public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, CategoryDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetCategoryByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly ICategoryRepository _categoryRepository;
+        public GetCategoryByIdQueryHandler(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<CategoryDetailsViewModel> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var category = await _dbContext.Categories.SingleOrDefaultAsync(c => c.Id == request.Id);
+            var category = await _categoryRepository.GetCategoryByIdAsync(request.Id);
 
             if (category == null) 
                 return null;

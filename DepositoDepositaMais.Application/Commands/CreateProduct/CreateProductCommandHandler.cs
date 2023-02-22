@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateProduct
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateProductCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProductRepository _productRepository;
+        public CreateProductCommandHandler(IProductRepository productRepository)
         {
-            _dbContext = dbContext;
+            _productRepository = productRepository;
         }
 
         public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -26,8 +25,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateProduct
                 request.QuantityPackaging
                 );
 
-            await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
+            await _productRepository.CreateProduct(product);
 
             return product.Id;
         }

@@ -1,8 +1,6 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateOutgoingOrder
 {
     public class CreateOutgoingOrderCommandHandler : IRequestHandler<CreateOutgoingOrderCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext  _dbContext;
-        public CreateOutgoingOrderCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingOrderRepository _OutgoingOrderRepository;
+        public CreateOutgoingOrderCommandHandler(IOutgoingOrderRepository OutgoingOrderRepository)
         {
-            _dbContext = dbContext;
+            _OutgoingOrderRepository = OutgoingOrderRepository;
         }
         public async Task<int> Handle(CreateOutgoingOrderCommand request, CancellationToken cancellationToken)
         {
@@ -27,8 +25,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateOutgoingOrder
                 request.SendIn
                 );
 
-            await _dbContext.OutgoingOrders.AddAsync(outgoingOrder);
-            await _dbContext.SaveChangesAsync();
+            await _OutgoingOrderRepository.CreateOutgoingOrder(outgoingOrder);
 
             return outgoingOrder.Id;
         }

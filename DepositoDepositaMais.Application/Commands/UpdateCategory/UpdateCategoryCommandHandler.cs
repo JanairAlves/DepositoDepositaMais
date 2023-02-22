@@ -1,10 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.UpdateCategory
 {
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateCategoryCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly ICategoryRepository _categoryRepository;
+        public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = _dbContext.Categories.SingleOrDefault(c => c.Id == request.Id);
+            var category = await _categoryRepository.GetCategoryByIdAsync(request.Id);
 
             category.Update(request.CategoryName, request.Description);
 
-            await _dbContext.SaveChangesAsync();
+            await _categoryRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

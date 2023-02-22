@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteIncomingOrder
 {
     public class DeleteIncomingOrderCommandHandler : IRequestHandler<DeleteIncomingOrderCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteIncomingOrderCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
+        public DeleteIncomingOrderCommandHandler(IIncomingOrderRepository incomingOrderRepository)
         {
-            _dbContext = dbContext;
+            _incomingOrderRepository = incomingOrderRepository;
         }
 
         public async Task<Unit> Handle(DeleteIncomingOrderCommand request, CancellationToken cancellationToken)
         {
-            var incomingOrder = _dbContext.IncomingOrders.SingleOrDefault(io => io.Id == request.Id);
+            var incomingOrder = await _incomingOrderRepository.GetIncomingOrderByIdAsync(request.Id);
 
             incomingOrder.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _incomingOrderRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,20 @@ namespace DepositoDepositaMais.Application.Commands.UpdateDeposit
 {
     public class UpdateDepositCommandHandler : IRequestHandler<UpdateDepositCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateDepositCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public UpdateDepositCommandHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<Unit> Handle(UpdateDepositCommand request, CancellationToken cancellationToken)
         {
-            var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == request.Id);
+            var deposit = await _depositRepository.GetDepositByIdAsync(request.Id);
 
             deposit.Update(request.DepositName, request.Description, request.CNPJ);
 
-            await _dbContext.SaveChangesAsync();
+            await _depositRepository.SaveChangesAsync();
+
 
             return Unit.Value;
         }

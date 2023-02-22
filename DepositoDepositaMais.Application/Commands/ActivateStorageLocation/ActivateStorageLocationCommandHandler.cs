@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.ActivateStorageLocation
 {
     public class ActivateStorageLocationCommandHandler : IRequestHandler<ActivateStorageLocationCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public ActivateStorageLocationCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IStorageLocationRepository _storageLocationRepository;
+        public ActivateStorageLocationCommandHandler(IStorageLocationRepository storageLocationRepository)
         {
-            _dbContext = dbContext;
+            _storageLocationRepository = storageLocationRepository;
         }
 
         public async Task<Unit> Handle(ActivateStorageLocationCommand request, CancellationToken cancellationToken)
         {
-            var storageLocation = _dbContext.StorageLocations.SingleOrDefault(sl => sl.Id == request.Id);
+            var storageLocation = await _storageLocationRepository.GetStorageLocationByIdAsync(request.Id);
 
             storageLocation.Activate();
 
-            await _dbContext.SaveChangesAsync();
+            await _storageLocationRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

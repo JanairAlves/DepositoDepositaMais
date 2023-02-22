@@ -1,6 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteDeposit
 {
     public class DeleteDepositCommandHandler : IRequestHandler<DeleteDepositCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteDepositCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public DeleteDepositCommandHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<Unit> Handle(DeleteDepositCommand request, CancellationToken cancellationToken)
         {
-            var deposit = _dbContext.Deposits.SingleOrDefault(d => d.Id == request.Id);
+            var deposit = await _depositRepository.GetDepositByIdAsync(request.Id);
             
             deposit.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _depositRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

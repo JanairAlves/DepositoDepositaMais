@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteOutgoingInvoice
 {
     public class DeleteOutgoingInvoiceCommandHandler : IRequestHandler<DeleteOutgoingInvoiceCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteOutgoingInvoiceCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IOutgoingInvoiceRepository _outgoingInvoiceRepository;
+        public DeleteOutgoingInvoiceCommandHandler(IOutgoingInvoiceRepository outgoingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _outgoingInvoiceRepository = outgoingInvoiceRepository;
         }
 
         public async Task<Unit> Handle(DeleteOutgoingInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var outgoingInvoice = _dbContext.OutgoingInvoices.SingleOrDefault(oi => oi.Id == request.Id);
+            var outgoingInvoice = await _outgoingInvoiceRepository.GetOutgoingInvoiceByIdAsync(request.Id);
 
             outgoingInvoice.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _outgoingInvoiceRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

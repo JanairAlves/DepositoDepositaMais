@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,20 @@ namespace DepositoDepositaMais.Application.Commands.DeleteProduct
 {
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteProductCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProductRepository _productRepository;
+        public DeleteProductCommandHandler(IProductRepository productRepository)
         {
-            _dbContext = dbContext;
+            _productRepository = productRepository;
         }
 
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var product = _dbContext.Products.SingleOrDefault(p => p.Id == request.Id);
+            var product = await _productRepository.GetProductByIdAsync(request.Id);
 
             product.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _productRepository.SaveChangesAsync();
+
 
             return Unit.Value;
         }

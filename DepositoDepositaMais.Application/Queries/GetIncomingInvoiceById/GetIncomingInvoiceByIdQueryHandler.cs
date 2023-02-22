@@ -1,11 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,15 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetIncomingInvoiceById
 {
     public class GetIncomingInvoiceByIdQueryHandler : IRequestHandler<GetIncomingInvoiceByIdQuery, IncomingInvoiceDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetIncomingInvoiceByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingInvoiceRepository _incomingInvoiceRepository;
+        public GetIncomingInvoiceByIdQueryHandler(IIncomingInvoiceRepository incomingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            _incomingInvoiceRepository = incomingInvoiceRepository;
         }
 
         public async Task<IncomingInvoiceDetailsViewModel> Handle(GetIncomingInvoiceByIdQuery request, CancellationToken cancellationToken)
         {
-            var incomingInvoice = await _dbContext.IncomingInvoices.SingleOrDefaultAsync(ii => ii.Id == request.Id);
+            var incomingInvoice = await _incomingInvoiceRepository.GetIncomingInvoiceByIdAsync(request.Id);
 
             var incomingInvoiceDetailsViewModel = new IncomingInvoiceDetailsViewModel(
                 incomingInvoice.Id,

@@ -1,11 +1,8 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,17 +10,17 @@ namespace DepositoDepositaMais.Application.Queries.GetAllIncomingOrders
 {
     public class GetAllIncomingOrdersQueryHandler : IRequestHandler<GetAllIncomingOrdersQuery, List<IncomingOrderViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllIncomingOrdersQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
+        public GetAllIncomingOrdersQueryHandler(IIncomingOrderRepository incomingOrderRepository)
         {
-            _dbContext = dbContext;
+            _incomingOrderRepository = incomingOrderRepository;
         }
 
         public async Task<List<IncomingOrderViewModel>> Handle(GetAllIncomingOrdersQuery request, CancellationToken cancellationToken)
         {
-            var incomingOrder = _dbContext.IncomingOrders;
+            var incomingOrders = await _incomingOrderRepository.GetAllIncomingOrdersAsync();
 
-            var incomingOrderViewModel = await incomingOrder
+            var incomingOrdersViewModel = incomingOrders
                 .Select(io => new IncomingOrderViewModel(
                     io.Id,
                     io.DepositId,
@@ -31,9 +28,9 @@ namespace DepositoDepositaMais.Application.Queries.GetAllIncomingOrders
                     io.Value,
                     io.Status,
                     io.CreatedAt)
-                ).ToListAsync();
+                ).ToList();
 
-            return incomingOrderViewModel;
+            return incomingOrdersViewModel;
         }
     }
 }

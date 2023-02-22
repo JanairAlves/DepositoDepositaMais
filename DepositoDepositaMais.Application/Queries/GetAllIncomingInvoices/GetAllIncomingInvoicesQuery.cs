@@ -1,13 +1,10 @@
-﻿using MediatR;
-using System;
+﻿using DepositoDepositaMais.Application.ViewModels;
+using MediatR;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Application.Queries.GetAllIncomingInvoices
 {
-    public class GetAllIncomingInvoicesQuery : IRequest<GetAllIncomingInvoicesQuery>
+    public class GetAllIncomingInvoicesQuery : IRequest<List<IncomingInvoiceViewModel>>
     {
         public GetAllIncomingInvoicesQuery(string query)
         {

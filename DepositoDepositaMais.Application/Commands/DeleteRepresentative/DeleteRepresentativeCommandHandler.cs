@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,19 +7,19 @@ namespace DepositoDepositaMais.Application.Commands.DeleteRepresentative
 {
     public class DeleteRepresentativeCommandHandler : IRequestHandler<DeleteRepresentativeCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public DeleteRepresentativeCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public DeleteRepresentativeCommandHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<Unit> Handle(DeleteRepresentativeCommand request, CancellationToken cancellationToken)
         {
-            var representative = _dbContext.Representatives.SingleOrDefault(r => r.Id == request.Id);
+            var representative = await _depositRepository.GetDepositByIdAsync(request.Id);
 
             representative.Inactivate();
 
-            await _dbContext.SaveChangesAsync();
+            await _depositRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

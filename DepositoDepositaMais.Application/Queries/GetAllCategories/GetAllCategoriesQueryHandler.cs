@@ -1,11 +1,8 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,19 +10,19 @@ namespace DepositoDepositaMais.Application.Queries.GetAllCategories
 {
     public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, List<CategoryViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllCategoriesQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly ICategoryRepository CategoryRepository;
+        public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            CategoryRepository = categoryRepository;
         }
 
         public async Task<List<CategoryViewModel>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = _dbContext.Categories;
+            var categories = await CategoryRepository.GetAllCategoriesAsync();
 
-            var categoriesViewModel = await categories
+            var categoriesViewModel = categories
                 .Select(c => new CategoryViewModel(c.Id, c.CategoryName)
-                ).ToListAsync();
+                ).ToList();
 
             return categoriesViewModel;
         }

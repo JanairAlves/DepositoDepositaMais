@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,15 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetProviderById
 {
     public class GetProviderByIdQueryHandler : IRequestHandler<GetProviderByIdQuery, ProviderDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetProviderByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProviderRepository _providerRepository;
+        public GetProviderByIdQueryHandler(IProviderRepository providerRepository)
         {
-            _dbContext = dbContext;
+            _providerRepository = providerRepository;
         }
 
         public async Task<ProviderDetailsViewModel> Handle(GetProviderByIdQuery request, CancellationToken cancellationToken)
         {
-            var provider = await _dbContext.Providers.SingleOrDefaultAsync(p => p.Id == request.Id);
+            var provider = await _providerRepository.GetProviderByIdAsync(request.Id);
 
             var providerDetailsViewModel = new ProviderDetailsViewModel(
                 provider.Id,

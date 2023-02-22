@@ -1,28 +1,26 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Application.ViewModels;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DepositoDepositaMais.Application.Queries.GetAllIncomingInvoices
 {
-    public class GetAllIncomingInvoicesQueryHandler : IRequestHandler<GetAllIncomingInvoicesQuery, GetAllIncomingInvoicesQuery>
+    public class GetAllIncomingInvoicesQueryHandler : IRequestHandler<GetAllIncomingInvoicesQuery, List<IncomingInvoiceViewModel>>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetAllIncomingInvoicesQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IIncomingInvoiceRepository incomingInvoiceRepository;
+        public GetAllIncomingInvoicesQueryHandler(IIncomingInvoiceRepository incomingInvoiceRepository)
         {
-            _dbContext = dbContext;
+            this.incomingInvoiceRepository = incomingInvoiceRepository;
         }
 
-        public async Task<GetAllIncomingInvoicesQuery> Handle(GetAllIncomingInvoicesQuery request, CancellationToken cancellationToken)
+        public async Task<List<IncomingInvoiceViewModel>> Handle(GetAllIncomingInvoicesQuery request, CancellationToken cancellationToken)
         {
-            var incomingInvoice = _dbContext.IncomingInvoices;
+            var incomingInvoices = await incomingInvoiceRepository.GetAllIncomingInvoicesAsync();
 
-            var incomingInvoiceViewModel = await incomingInvoice
+            var incomingInvoicesViewModel = incomingInvoices
                 .Select(ii => new IncomingInvoiceViewModel(
                     ii.Id,
                     ii.CompanyName,
@@ -32,9 +30,9 @@ namespace DepositoDepositaMais.Application.Queries.GetAllIncomingInvoices
                     ii.CarPlate,
                     ii.CNPJCarrier,
                     ii.CPFCarrier)
-                ).ToListAsync();
+                ).ToList();
 
-            return incomingInvoiceViewModel;
+            return incomingInvoicesViewModel;
         }
     }
 }

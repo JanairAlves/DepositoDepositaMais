@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetProductById
 {
     public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetProductByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProductRepository _productRepository;
+        public GetProductByIdQueryHandler(IProductRepository productRepository)
         {
-            _dbContext = dbContext;
+            _productRepository = productRepository;
         }
 
         public async Task<ProductDetailsViewModel> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = await _dbContext.Products
-                .Include(p => p.StorageLocation)
-                .Include(p => p.Category)
-                .SingleOrDefaultAsync(p => p.Id == request.Id);
+            var product = await _productRepository.GetProductByIdAsync(request.Id);
 
             var productDetailsViewModel = new ProductDetailsViewModel(
                 product.ProductCode,

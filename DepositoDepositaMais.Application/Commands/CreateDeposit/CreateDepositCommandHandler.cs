@@ -1,5 +1,5 @@
 ﻿using DepositoDepositaMais.Core.Entities;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,10 +8,10 @@ namespace DepositoDepositaMais.Application.Commands.CreateDeposit
 {
     public class CreateDepositCommandHandler : IRequestHandler<CreateDepositCommand, int>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public CreateDepositCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public CreateDepositCommandHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<int> Handle(CreateDepositCommand request, CancellationToken cancellationToken)
@@ -22,8 +22,7 @@ namespace DepositoDepositaMais.Application.Commands.CreateDeposit
                 request.CNPJ
                 );
 
-            await _dbContext.Deposits.AddAsync(deposit);
-            await _dbContext.SaveChangesAsync();
+            await _depositRepository.CreateDepositAsync(deposit);
 
             return deposit.Id;
         }

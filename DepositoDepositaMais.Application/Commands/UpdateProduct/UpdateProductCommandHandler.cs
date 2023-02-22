@@ -1,9 +1,5 @@
-﻿using DepositoDepositaMais.Infrastructure.Persistence;
+﻿using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,15 +7,15 @@ namespace DepositoDepositaMais.Application.Commands.UpdateProduct
 {
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Unit>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public UpdateProductCommandHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IProductRepository _productRepository;
+        public UpdateProductCommandHandler(IProductRepository productRepository)
         {
-            _dbContext = dbContext;
+            _productRepository = productRepository;
         }
 
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = _dbContext.Products.SingleOrDefault(p => p.Id == request.Id);
+            var product = await _productRepository.GetProductByIdAsync(request.Id);
 
             product.Update(
                 request.ProductCode,
@@ -30,7 +26,8 @@ namespace DepositoDepositaMais.Application.Commands.UpdateProduct
                 request.QuantityPackaging
                 );
 
-            await _dbContext.SaveChangesAsync();
+            await _productRepository.SaveChangesAsync();
+
 
             return Unit.Value;
         }

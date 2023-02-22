@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,17 +8,15 @@ namespace DepositoDepositaMais.Application.Queries.GetRepresentativeById
 {
     public class GetRepresentativeByIdQueryHandler : IRequestHandler<GetRepresentativeByIdQuery, RepresentativeDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetRepresentativeByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IRepresentativeRepository _representativeRepository;
+        public GetRepresentativeByIdQueryHandler(IRepresentativeRepository representativeRepository)
         {
-            _dbContext = dbContext;
+            _representativeRepository = representativeRepository;
         }
 
         public async Task<RepresentativeDetailsViewModel> Handle(GetRepresentativeByIdQuery request, CancellationToken cancellationToken)
         {
-            var representative = await _dbContext.Representatives
-                .Include(r => r.Provider)
-                .SingleOrDefaultAsync(r => r.Id == request.Id);
+            var representative = await _representativeRepository.GetRepresentativeByIdAsync(request.Id);
 
             var representativeDetailsViewModel = new RepresentativeDetailsViewModel(
                 representative.Id,

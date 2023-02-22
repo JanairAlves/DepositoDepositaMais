@@ -1,7 +1,6 @@
 ﻿using DepositoDepositaMais.Application.ViewModels;
-using DepositoDepositaMais.Infrastructure.Persistence;
+using DepositoDepositaMais.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,17 +8,17 @@ namespace DepositoDepositaMais.Application.Queries.GetDepositById
 {
     public class GetDepositByIdQueryHandler : IRequestHandler<GetDepositByIdQuery, DepositDetailsViewModel>
     {
-        private readonly DepositoDepositaMaisDbContext _dbContext;
-        public GetDepositByIdQueryHandler(DepositoDepositaMaisDbContext dbContext)
+        private readonly IDepositRepository _depositRepository;
+        public GetDepositByIdQueryHandler(IDepositRepository depositRepository)
         {
-            _dbContext = dbContext;
+            _depositRepository = depositRepository;
         }
 
         public async Task<DepositDetailsViewModel> Handle(GetDepositByIdQuery request, CancellationToken cancellationToken)
         {
-            var deposit = await _dbContext.Deposits.SingleOrDefaultAsync(d => d.Id == request.Id);
+            var deposit = await _depositRepository.GetDepositByIdAsync(request.Id);
 
-            var depositsDetailsViewModel = new DepositDetailsViewModel(
+            var depositDetailsViewModel = new DepositDetailsViewModel(
                 deposit.Id,
                 deposit.DepositName,
                 deposit.Description,
@@ -28,7 +27,7 @@ namespace DepositoDepositaMais.Application.Queries.GetDepositById
                 deposit.CreatedAt
                 );
 
-            return depositsDetailsViewModel;
+            return depositDetailsViewModel;
         }
     }
 }
